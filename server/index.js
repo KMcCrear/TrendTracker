@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const axios = require("axios");
+const { response } = require("express");
 
 const serverPort = 3001;
 
@@ -22,6 +24,22 @@ app.use(
 		credentials: true,
 	})
 );
+
+//for testing purposes
+function getTwitterData(twitterQuery) {
+	axios({
+		method: "get",
+		headers: {
+			Authorization: `${YOUR_AUTH_KEY}`,
+		},
+		credentials: true,
+		url: `https://api.twitter.com/2/tweets/search/recent?query=${twitterQuery}`,
+	}).then(function (response) {
+		console.log(response.data);
+	});
+}
+
+getTwitterData("bitcoin");
 
 app.listen(serverPort, () => {
 	console.log(`Server Running on Port ${serverPort}`);
