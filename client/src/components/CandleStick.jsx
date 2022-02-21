@@ -288,7 +288,4 @@ class CandleStick extends React.Component {
 	}
 }
 
-// const domContainer = document.getElementsByClassName("App");
-// ReactDOM.render(<CandleStick />, domContainer);
-
 export default CandleStick;
