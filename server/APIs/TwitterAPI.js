@@ -19,11 +19,4 @@ router.get('/search/:search',(req,res) => {
     });
 });
 
-/*
-      
-curl "https://api.twitter.com/2/tweets/search/recent?query=bitcoin" -H "Authorization: AAAAAAAAAAAAAAAAAAAAAGDHZQEAAAAAzS3up1pR%2FBgry2LrRkzMK2wdT%2Fc%3D8RadadxvFKJORwgrFuHkg1QaZCHDvBNmnraExeaHzU7vuTZBAj"
-
-    
-*/
-
 module.exports = router;
