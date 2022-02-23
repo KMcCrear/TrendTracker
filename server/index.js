@@ -25,9 +25,7 @@ app.use(
 	})
 );
 
-const twitterAuthStr = "Bearer ".concat(
-	"AAAAAAAAAAAAAAAAAAAAAGDHZQEAAAAAzS3up1pR%2FBgry2LrRkzMK2wdT%2Fc%3D8RadadxvFKJORwgrFuHkg1QaZCHDvBNmnraExeaHzU7vuTZBAj"
-); // this will be used to pass the token
+const twitterAuthStr = "Bearer ".concat(""); // this will be used to pass the token
 
 function getTwitterData(twitterQuery) {
 	axios
@@ -45,17 +43,16 @@ function getTwitterData(twitterQuery) {
 		);
 }
 
-// const financeAuthStr = "xE4Iupvyfl2kQuJi2taQK9kAauYFC9ni3mgKiboz"; // this will be used to pass the token
-
-function getFinanceData(userQuery) {
-	const financeAuthStr = "xE4Iupvyfl2kQuJi2taQK9kAauYFC9ni3mgKiboz"; // this will be used to pass the token
-	return axios
-		.get(
-			`https://yfapi.net/v8/finance/chart/${userQuery}?range=1mo&region=US&interval=1d&lang=en&events=div%2Csplit`,
-			{ headers: { "X-API-KEY": financeAuthStr } }
-		)
-		.then((response) => response.data);
-}
+// This function is for yahoofinance API
+// function getFinanceData(userQuery) {
+// 	const financeAuthStr = "xE4Iupvyfl2kQuJi2taQK9kAauYFC9ni3mgKiboz"; // this will be used to pass the token
+// 	return axios
+// 		.get(
+// 			`https://yfapi.net/v8/finance/chart/${userQuery}?range=1mo&region=US&interval=1d&lang=en&events=div%2Csplit`,
+// 			{ headers: { "X-API-KEY": financeAuthStr } }
+// 		)
+// 		.then((response) => response.data);
+// }
 
 app.post("/data", (req, res) => {
 	userQuery = req.body.userQuery;
@@ -66,16 +63,35 @@ app.post("/data", (req, res) => {
 		let close = response.chart.result[0].indicators.quote[0].close;
 		let open = response.chart.result[0].indicators.quote[0].open;
 
-		const financeData = {
-			timeStamp: timeStamp,
-			high: high,
-			low: low,
-			close: close,
-			open: open,
-		};
+		const financeData = [
+			{
+				timeStamp: timeStamp,
+				high: high,
+				low: low,
+				close: close,
+				open: open,
+			},
+		];
+		// const financeData = [timeStamp, high, low, close, open];
 		res.send(financeData);
 	});
 });
+
+//Functions relating to Polygon API
+app.post("/polydata", (req, res) => {
+	userQuery = req.body.userQuery;
+	getPolygonData(userQuery).then((response) => {
+		res.send(response);
+	});
+});
+
+function getPolygonData(userQuery) {
+	return axios
+		.get(
+			`https://api.polygon.io/v2/aggs/ticker/${userQuery}/range/1/day/2022-02-02/2022-02-22?adjusted=true&sort=asc&limit=120&apiKey=YOUR_API_KEY`
+		)
+		.then((response) => response.data);
+}
 
 app.listen(serverPort, () => {
 	console.log(`Server Running on Port ${serverPort}`);

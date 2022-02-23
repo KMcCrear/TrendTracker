@@ -5,24 +5,21 @@ import endPoint from "../helpers/endPoint";
 
 const getFinanceData = () => {
 	return axios
-		.post(`${endPoint()}/data`, {
+		.post(`${endPoint()}/polydata`, {
 			userQuery: "AAPL",
 		})
-		.then((response) => response);
+		.then((response) => response.data);
 };
 
 const makeChartData = () => {
-	let dataArray = getFinanceData().then((response) => response.value);
-	console.log(dataArray);
-	const chartArray = [];
-	dataArray.forEach((entry) => {
-		chartArray.push([
-			{
-				x: new Date(entry.timeStamp),
-				y: [entry.open, entry.high, entry.low, entry.close],
-			},
-		]);
+	let dataObject = getFinanceData().then((response) => {
+		return response.results;
 	});
+
+	//console.log(dataObject);
+	for (let i = 0; i < dataObject.length; i++) {
+		console.log(dataObject[i]);
+	}
 };
 
 class CandleStick extends React.Component {
