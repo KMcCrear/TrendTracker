@@ -3,17 +3,13 @@ import endPoint from "../helpers/endPoint";
 
 const getFinanceData = () => {
 	return axios
-		.post(`${endPoint()}/polydata`, {
-			userQuery: "AAPL",
-		})
+		.get(`${endPoint()}/polygon/search/ticker/${'AAPL'}`)
 		.then((response) => response.data);
 };
 
 const makeChartData = async () => {
 	const arrayOfOb = [];
-	let dataObject = await getFinanceData().then((response) => {
-		return response.results;
-	});
+	const dataObject = await getFinanceData();
 
 	dataObject.forEach((entry) => {
 		arrayOfOb.push({
