@@ -1,9 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
-const { response } = require("express");
 
-const serverPort = 3001;
+const {HOST,PORT} = require("./config/host.json");
 
 const app = express();
 
@@ -15,23 +14,23 @@ app.use(function (req, res, next) {
 	);
 	next();
 });
+
 app.use(express.json());
 
 app.use(
 	cors({
-		origin: ["http://localhost:3000"],
+		origin: [`${HOST}:${PORT}`],
 		methods: ["GET", "POST", "PUT"],
 		credentials: true,
 	})
 );
 
-const twitterAuthStr = "Bearer ".concat(""); // this will be used to pass the token
 
 function getTwitterData(twitterQuery) {
 	axios
 		.get(
 			`https://api.twitter.com/2/tweets/search/recent?query=${twitterQuery}`,
-			{ headers: { Authorization: twitterAuthStr } }
+			{ headers: { Authorization: twitterapi } }
 		)
 		.then(
 			(response) => {
@@ -93,6 +92,13 @@ function getPolygonData(userQuery) {
 		.then((response) => response.data);
 }
 
-app.listen(serverPort, () => {
-	console.log(`Server Running on Port ${serverPort}`);
+
+//API imports
+const twitterapi = require('./APIs/TwitterAPI');
+
+//API uses
+app.use('/twitter',twitterapi);
+
+app.listen(PORT, () => {
+	console.log(`Server Running on Port ${PORT}`);
 });
