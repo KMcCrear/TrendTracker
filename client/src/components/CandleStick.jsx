@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import axios from "axios";
 import endPoint from "../helpers/endPoint";
 
-const getFinanceData = () => {
+const getFinanceData = async () => {
 	return axios
 		.post(`${endPoint()}/polydata`, {
 			userQuery: "AAPL",
@@ -11,25 +11,34 @@ const getFinanceData = () => {
 		.then((response) => response.data);
 };
 
-const makeChartData = () => {
-	let dataObject = getFinanceData().then((response) => {
+const makeChartData = async () => {
+	const arrayOfOb = [];
+	let dataObject = await getFinanceData().then((response) => {
 		return response.results;
 	});
 
-	//console.log(dataObject);
-	for (let i = 0; i < dataObject.length; i++) {
-		console.log(dataObject[i]);
-	}
+	dataObject.forEach((entry) => {
+		arrayOfOb.push({
+			x: new Date(entry.t),
+			y: [entry.o, entry.h, entry.l, entry.c],
+		});
+	},);
+	return arrayOfOb;
 };
 
 class CandleStick extends React.Component {
 	constructor(props) {
 		super(props);
+		let data;
+		makeChartData().then((array) => {
+			data = array;
+			console.log(data);
+		});
 
 		this.state = {
 			series: [
 				{
-					data: makeChartData(),
+					data: data,
 				},
 			],
 			options: {
