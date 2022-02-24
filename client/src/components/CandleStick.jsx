@@ -1,30 +1,6 @@
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
-import axios from "axios";
-import endPoint from "../helpers/endPoint";
-
-const getFinanceData = () => {
-	return axios
-		.post(`${endPoint()}/polydata`, {
-			userQuery: "AAPL",
-		})
-		.then((response) => response.data);
-};
-
-const makeChartData = async () => {
-	const arrayOfOb = [];
-	let dataObject = await getFinanceData().then((response) => {
-		return response.results;
-	});
-
-	dataObject.forEach((entry) => {
-		arrayOfOb.push({
-			x: new Date(entry.t),
-			y: [entry.o, entry.h, entry.l, entry.c],
-		});
-	},);
-	return arrayOfOb;
-};
+import makeChartData from "../helpers/getFinanceData";
 
 class CandleStick extends React.Component {
 	constructor(props) {
@@ -59,8 +35,8 @@ class CandleStick extends React.Component {
 
 	componentDidMount() {
 		makeChartData().then((res) => {
-			this.setState({series: [{data: res}]});
-		})	
+			this.setState({ series: [{ data: res }] });
+		});
 	}
 
 	render() {
@@ -73,7 +49,7 @@ class CandleStick extends React.Component {
 					height={350}
 				/>
 			</div>
-		);	
+		);
 	}
 }
 

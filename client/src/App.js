@@ -1,6 +1,7 @@
 import "./App.css";
 import NavBar from "./components/Navbar.jsx";
 import CandleStick from "./components/CandleStick.jsx";
+import makeChartData from "./helpers/getFinanceData";
 
 function App() {
 	return (
@@ -8,7 +9,7 @@ function App() {
 			<nav>
 				<NavBar />
 			</nav>
-			<CandleStick />
+			<CandleStick data={makeChartData()} />
 		</div>
 	);
 }
