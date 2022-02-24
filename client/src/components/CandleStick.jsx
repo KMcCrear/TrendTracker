@@ -1,26 +1,6 @@
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
-import axios from "axios";
-import endPoint from "../helpers/endPoint";
-
-const getFinanceData = () => {
-	return axios
-		.post(`${endPoint()}/polydata`, {
-			userQuery: "AAPL",
-		})
-		.then((response) => response.data);
-};
-
-const makeChartData = () => {
-	let dataObject = getFinanceData().then((response) => {
-		return response.results;
-	});
-
-	//console.log(dataObject);
-	for (let i = 0; i < dataObject.length; i++) {
-		console.log(dataObject[i]);
-	}
-};
+import makeChartData from "../helpers/getFinanceData";
 
 class CandleStick extends React.Component {
 	constructor(props) {
@@ -29,7 +9,7 @@ class CandleStick extends React.Component {
 		this.state = {
 			series: [
 				{
-					data: makeChartData(),
+					data: [],
 				},
 			],
 			options: {
@@ -51,6 +31,12 @@ class CandleStick extends React.Component {
 				},
 			},
 		};
+	}
+
+	componentDidMount() {
+		makeChartData().then((res) => {
+			this.setState({ series: [{ data: res }] });
+		});
 	}
 
 	render() {

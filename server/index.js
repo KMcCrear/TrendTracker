@@ -83,6 +83,7 @@ function getPolygonData(userQuery) {
 		.then((response) => response.data);
 }
 
+
 //API imports
 const twitterapi = require('./APIs/TwitterAPI');
 const polygonapi = require('./APIs/PolygonAPI');
