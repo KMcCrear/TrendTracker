@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import axios from "axios";
 import endPoint from "../helpers/endPoint";
 
-const getFinanceData = async () => {
+const getFinanceData = () => {
 	return axios
 		.post(`${endPoint()}/polydata`, {
 			userQuery: "AAPL",
@@ -29,16 +29,11 @@ const makeChartData = async () => {
 class CandleStick extends React.Component {
 	constructor(props) {
 		super(props);
-		let data;
-		makeChartData().then((array) => {
-			data = array;
-			console.log(data);
-		});
 
 		this.state = {
 			series: [
 				{
-					data: data,
+					data: [],
 				},
 			],
 			options: {
@@ -62,6 +57,12 @@ class CandleStick extends React.Component {
 		};
 	}
 
+	componentDidMount() {
+		makeChartData().then((res) => {
+			this.setState({series: [{data: res}]});
+		})	
+	}
+
 	render() {
 		return (
 			<div id="chart">
@@ -72,7 +73,7 @@ class CandleStick extends React.Component {
 					height={350}
 				/>
 			</div>
-		);
+		);	
 	}
 }
 
