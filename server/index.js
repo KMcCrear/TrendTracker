@@ -75,14 +75,6 @@ app.post("/data", (req, res) => {
 	});
 });
 
-//Functions relating to Polygon API
-app.post("/polydata", (req, res) => {
-	userQuery = req.body.userQuery;
-	getPolygonData(userQuery).then((response) => {
-		res.send(response);
-	});
-});
-
 function getPolygonData(userQuery) {
 	return axios
 		.get(
@@ -93,9 +85,11 @@ function getPolygonData(userQuery) {
 
 //API imports
 const twitterapi = require('./APIs/TwitterAPI');
+const polygonapi = require('./APIs/PolygonAPI');
 
 //API uses
 app.use('/twitter',twitterapi);
+app.use('/polydata', polygonapi);
 
 app.listen(PORT, () => {
 	console.log(`Server Running on Port ${PORT}`);
