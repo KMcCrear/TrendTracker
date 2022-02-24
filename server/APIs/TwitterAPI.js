@@ -6,7 +6,7 @@ const {TWITTERAPITOKEN} = require('../config/tokens/TwitterAPIToken.json');
 /**
  * Searches and returns the latest 10 tweets related to the search term
  */
-router.get('/search/:search',(req,res) => {
+router.get('/search/recent/:search',(req,res) => {
     const query = req.params.search;
     axios({
         method: "get",
