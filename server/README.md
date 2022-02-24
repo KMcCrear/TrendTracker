@@ -12,10 +12,11 @@ The backend currently has access to 2 APIs:
 
 ### Twitter
 The Twitter API is accessed through `/twitter` , see [TwitterAPI.js](./APIs/TwitterAPI.js)
-- `twitter/search/{SEARCHTERM}` - Searches and returns the latest 10 tweets related to the search term
+- `twitter/search/recent/{SEARCHTERM}` - Searches and returns the latest 10 tweets related to the search term
 
-### Yahoo Fianance
-The Yahoo fianance API is accessed through `/yf` , see [YahooFiananceAPI.js](./APIs/YahooFiananceAPI.js)
+### Polygon.io
+The Polygon.io API is accessed through `/polygon` , see [PolygonAPI.js](./APIs/PolygonAPI.js)
+- `polygon/search/ticker/{STOCK TICKER}` - Searches and returns the last week of stock data
 
 ## Build
 TBC
