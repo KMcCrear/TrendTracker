@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
-
 const {HOST,PORT} = require("./config/host.json");
 
 const app = express();
@@ -25,23 +24,7 @@ app.use(
 	})
 );
 
-
-function getTwitterData(twitterQuery) {
-	axios
-		.get(
-			`https://api.twitter.com/2/tweets/search/recent?query=${twitterQuery}`,
-			{ headers: { Authorization: twitterapi } }
-		)
-		.then(
-			(response) => {
-				console.log(response.data);
-			},
-			(error) => {
-				console.log(error);
-			}
-		);
-}
-
+/*
 // This function is for yahoofinance API
 // function getFinanceData(userQuery) {
 // 	const financeAuthStr = "xE4Iupvyfl2kQuJi2taQK9kAauYFC9ni3mgKiboz"; // this will be used to pass the token
@@ -74,30 +57,15 @@ app.post("/data", (req, res) => {
 		// const financeData = [timeStamp, high, low, close, open];
 		res.send(financeData);
 	});
-});
-
-//Functions relating to Polygon API
-app.post("/polydata", (req, res) => {
-	userQuery = req.body.userQuery;
-	getPolygonData(userQuery).then((response) => {
-		res.send(response);
-	});
-});
-
-function getPolygonData(userQuery) {
-	return axios
-		.get(
-			`https://api.polygon.io/v2/aggs/ticker/${userQuery}/range/1/day/2022-02-02/2022-02-22?adjusted=true&sort=asc&limit=120&apiKey=YOUR_API_KEY`
-		)
-		.then((response) => response.data);
-}
-
+});*/
 
 //API imports
 const twitterapi = require('./APIs/TwitterAPI');
+const polygonapi = require('./APIs/PolygonAPI');
 
 //API uses
 app.use('/twitter',twitterapi);
+app.use('/polygon', polygonapi);
 
 app.listen(PORT, () => {
 	console.log(`Server Running on Port ${PORT}`);

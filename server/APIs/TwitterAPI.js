@@ -3,7 +3,11 @@ const axios = require("axios");
 const router = express.Router();
 const {TWITTERAPITOKEN} = require('../config/tokens/TwitterAPIToken.json');
 
-router.get('/search/:search',(req,res) => {
+/**
+ * @name SearchRecent
+ * Searches and returns the latest 10 tweets related to the search term
+ */
+router.get('/search/recent/:search',(req,res) => {
     const query = req.params.search;
     axios({
         method: "get",
@@ -15,7 +19,8 @@ router.get('/search/:search',(req,res) => {
     }).then((response) => {
         res.send(response.data.data);
     }).catch((err) => {
-        console.log('uh oh')
+        console.log(new Date().toString().substring(0,24) + ': ' + err.message);
+        res.send(err);
     });
 });
 
