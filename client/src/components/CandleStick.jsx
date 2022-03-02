@@ -1,6 +1,6 @@
 import React from "react";
 import Chart from "react-apexcharts";
-import makeChartData from "../helpers/getFinanceData";
+import makeChartData from "../helpers/makeChartData";
 
 class CandleStick extends React.Component {
 	constructor(props) {
