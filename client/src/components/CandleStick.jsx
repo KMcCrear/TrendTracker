@@ -1,6 +1,9 @@
 import React from "react";
 import Chart from "react-apexcharts";
-import makeChartData from "../helpers/makeChartData";
+
+const updataChart = (userQuery) => {
+	CandleStick.updateSeries([{ data: userQuery }]);
+};
 
 class CandleStick extends React.Component {
 	constructor(props) {
@@ -34,9 +37,7 @@ class CandleStick extends React.Component {
 	}
 
 	componentDidMount() {
-		makeChartData().then((res) => {
-			this.setState({ series: [{ data: res }] });
-		});
+		this.setState({ series: [{ data: this.props.series }] });
 	}
 
 	render() {
@@ -53,4 +54,4 @@ class CandleStick extends React.Component {
 	}
 }
 
-export default CandleStick;
+export { CandleStick, updataChart };

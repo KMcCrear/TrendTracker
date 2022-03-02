@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import getFinanceData from "../helpers/getFinanceData";
+import { updateOnSearch } from "../helpers/updateOnSearch";
 // import ReorderIcon from "@material-ui/icons/Reorder";
 
 export default function NavBar() {
 	const [showLinks, setShowLinks] = useState(false);
 	const [userQuery, setUserQuery] = useState("");
+
+	const sendUserQuery = (e) => {
+		console.log(userQuery);
+		e.preventDefault();
+		updateOnSearch(userQuery);
+	};
+
 	return (
 		<div>
 			<div className="Navbar">
@@ -24,8 +31,9 @@ export default function NavBar() {
 							<input
 								type="text"
 								onChange={(e) => setUserQuery(e.target.value)}
-								onSubmit={getFinanceData(userQuery)}
+								onSubmit={sendUserQuery}
 							/>
+							<button onClick={(e) => sendUserQuery(e)} />
 						</form>
 					</div>
 				</div>

@@ -1,8 +1,8 @@
 import getFinanceData from "./getFinanceData";
 
-const makeChartData = async () => {
+const makeChartData = async (userQuery) => {
 	const arrayOfOb = [];
-	const dataObject = await getFinanceData();
+	const dataObject = await getFinanceData(userQuery);
 
 	dataObject.forEach((entry) => {
 		arrayOfOb.push({
@@ -10,6 +10,7 @@ const makeChartData = async () => {
 			y: [entry.o, entry.h, entry.l, entry.c],
 		});
 	});
+
 	return arrayOfOb;
 };
 
