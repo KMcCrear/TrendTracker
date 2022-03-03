@@ -20,8 +20,10 @@ function Dashboard() {
 		<div className="dashboardContainer">
 			<h1>Dashboard</h1>
 			<CandleStick series={chartData} />
+
 		</div>
 	);
 }
 
 export { Dashboard, retriveData };
+
