@@ -8,10 +8,9 @@ export default function NavBar() {
 			<div className="Navbar">
 				<div className="leftSide">
 					<div className="links" id={showLinks ? "hidden" : ""}>
-						<a href="/">Home</a>
-						<a href="/paycalc">Stocks</a>
-						<a href="/jobinfo">Crypto</a>
-						<a href="/aboutus">About Us</a>
+						<a href="/">Dashboard</a>
+						<a href="/stocks">Stocks</a>
+						<a href="/crypto">Crypto</a>
 					</div>
 					<button onClick={() => setShowLinks(!showLinks)}>
 						{/* <ReorderIcon /> */}

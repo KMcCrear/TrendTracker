@@ -1,7 +1,7 @@
 Place any required tokens in this folder e.g
 
-TwitterAPIToken.json
-====================
+# TwitterAPIToken.json
+
 {
-    "TWITTERAPITOKEN": "TOKEN HERE"
+"TWITTERAPITOKEN": "TOKEN HERE"
 }
