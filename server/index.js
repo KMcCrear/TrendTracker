@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
-const {HOST,PORT} = require("./config/host.json");
+const { HOST, PORT } = require("./config/host.json");
 
 const app = express();
 
@@ -60,12 +60,14 @@ app.post("/data", (req, res) => {
 });*/
 
 //API imports
-const twitterapi = require('./APIs/TwitterAPI');
-const polygonapi = require('./APIs/PolygonAPI');
+const twitterapi = require("./APIs/TwitterAPI");
+const polygonapi = require("./APIs/PolygonAPI");
+const marketcapapi = require("./APIs/MarketCapAPI");
 
 //API uses
-app.use('/twitter',twitterapi);
-app.use('/polygon', polygonapi);
+app.use("/twitter", twitterapi);
+app.use("/polygon", polygonapi);
+app.use("/marketcap", marketcapapi);
 
 app.listen(PORT, () => {
 	console.log(`Server Running on Port ${PORT}`);
