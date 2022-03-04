@@ -12,7 +12,6 @@ function updateOnSearch(data) {
 }
 
 function returnDataToChart() {
-	console.log("IN UPdate");
 	return dataObj;
 }
 export { updateOnSearch, returnDataToChart };
