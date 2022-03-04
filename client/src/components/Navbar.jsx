@@ -7,7 +7,6 @@ export default function NavBar() {
 	const [userQuery, setUserQuery] = useState("");
 
 	const sendUserQuery = (e) => {
-		console.log(userQuery);
 		e.preventDefault();
 		updateOnSearch(userQuery);
 	};

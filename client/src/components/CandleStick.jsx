@@ -12,7 +12,7 @@ class CandleStick extends React.Component {
 		this.state = {
 			series: [
 				{
-					data: [],
+					data: this.props.series,
 				},
 			],
 			options: {
@@ -36,9 +36,9 @@ class CandleStick extends React.Component {
 		};
 	}
 
-	componentDidMount() {
-		this.setState({ series: [{ data: this.props.series }] });
-	}
+	// componentDidMount() {
+	// 	this.setState({ series: [{ data: this.props.series }] });
+	// }
 
 	render() {
 		return (

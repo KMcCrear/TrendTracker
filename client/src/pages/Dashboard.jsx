@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { CandleStick } from "../components/CandleStick";
 import { returnDataToChart } from "../helpers/updateOnSearch";
 
-let someData = null;
-console.log(someData);
-
-function retriveData() {
-	someData = returnDataToChart();
-}
-
-function Dashboard() {
-	const [chartData, setChartData] = useState();
-
-	if (someData != null) {
-		setChartData(someData);
-	}
-
+const Dashboard = () => {
+	const [chart, setChart] = useState(<CandleStick series={[]} />);
+	const getData = () => {
+		const data = returnDataToChart();
+		console.log(data);
+		setChart(<CandleStick series={data} />);
+	};
 	return (
 		<div className="dashboardContainer">
 			<h1>Dashboard</h1>
-			<CandleStick series={chartData} />
+			{chart}
+			<button onClick={() => getData()}>Update data</button>
 		</div>
 	);
-}
+};
 
-export { Dashboard, retriveData };
+export { Dashboard };
