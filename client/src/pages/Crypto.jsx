@@ -32,3 +32,12 @@ export default function Crypto() {
 		</div>
 	);
 }
+
+
+	return (
+		<div className="cryptoContainer">
+			<h1>Crypto</h1>
+			{cryptoData}
+		</div>
+	);
+}
