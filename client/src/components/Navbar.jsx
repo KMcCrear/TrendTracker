@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { updateOnSearch } from "../helpers/updateOnSearch";
+import React, { useRef, useState } from "react";
 // import ReorderIcon from "@material-ui/icons/Reorder";
 
-export default function NavBar() {
+function NavBar(props) {
 	const [showLinks, setShowLinks] = useState(false);
-	const [userQuery, setUserQuery] = useState("");
+	let tempInput = '';
 
-	const sendUserQuery = (e) => {
+	const afunc = ((e) => {
 		e.preventDefault();
-		updateOnSearch(userQuery);
-	};
+		props.setInput(tempInput);
+	})
 
 	return (
 		<div>
@@ -26,13 +25,13 @@ export default function NavBar() {
 				</div>
 				<div className="rightSide">
 					<div className="searchContainer">
-						<form>
+						<form onSubmit={ afunc }>
 							<input
 								type="text"
-								onChange={(e) => setUserQuery(e.target.value)}
-								onSubmit={sendUserQuery}
+								placeholder={"Search Company Ticker"}
+								onChange={(e) => {tempInput=e.target.value}}
 							/>
-							<button onClick={(e) => sendUserQuery(e)} />
+							<button type="submit">Button</button>
 						</form>
 					</div>
 				</div>
@@ -40,3 +39,11 @@ export default function NavBar() {
 		</div>
 	);
 }
+
+export {NavBar}
+
+/*
+onChange={(e) => setUserQuery(e.target.value)}
+onSubmit={sendUserQuery}
+value={props.input}
+*/

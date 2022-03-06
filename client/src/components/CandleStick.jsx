@@ -39,8 +39,21 @@ class CandleStick extends React.Component {
 		//setInterval(this.update.bind(this),5000);
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.props.ticker !== prevProps.ticker) {
+			this.update();
+		}	
+	}
+
 	async update() {
-		const data = await makeChartData(this.props.ticker);
+		let ticker;
+		if (!this.props.ticker) {
+			ticker = 'AAPL';
+		}
+		else {
+			ticker = this.props.ticker.toUpperCase();
+		}
+		const data = await makeChartData(ticker);
 		console.log(data);
 		this.setState({ series: [{ data: data }] });
 	}
