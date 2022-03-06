@@ -10,6 +10,11 @@ const {
  * Searches and returns the latest trending crypto currencies
  */
 
+/**
+ * For testing use this endpoint - sandbox-api.coinmarketcap.com
+ * For Live version use this endpoint - pro-api.coinmarketcap.com
+ */
+
 router.get("/trending/latest", (req, res) => {
 	axios({
 		method: "get",
