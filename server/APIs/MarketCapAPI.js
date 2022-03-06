@@ -2,8 +2,8 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 const {
-	MARKETCAPAPITOKEN,
-} = require("../config/tokens/MarketCapAPIToken.json");
+	MARKET_CAP_API_TOKEN,
+} = require("../config/APITokens.json");
 
 /**
  * @name SearchLatest
@@ -19,7 +19,7 @@ router.get("/trending/latest", (req, res) => {
 	axios({
 		method: "get",
 		headers: {
-			"X-CMC_PRO_API_KEY": ` ${MARKETCAPAPITOKEN}`,
+			"X-CMC_PRO_API_KEY": ` ${MARKET_CAP_API_TOKEN}`,
 		},
 		credentials: true,
 		url: `https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest`,
