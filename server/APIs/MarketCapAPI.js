@@ -1,9 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
-const {
-	MARKETCAPAPITOKEN,
-} = require("../config/tokens/MarketCapAPIToken.json");
+const { MARKETCAPAPITOKEN } = require("../config/tokens/MarketCapAPIToken.json");
 
 /**
  * @name SearchLatest
