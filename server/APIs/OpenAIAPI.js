@@ -13,7 +13,7 @@ router.post('/tweet-sentiment',async(req,res) => {
     });
     const openai = new OpenAIApi(configuration);
     const response = await openai.createCompletion("text-davinci-001", {
-      prompt: "Is the following tweet positive, negative or neutral about Apple?: I love Apple. I think it is the best company in the world.",
+      prompt: "Is the following tweet positive, negative or neutral about Meta?: Zuckerberg with his metaverse might be doing a fatal mistake",
     });
     console.log('Tweet IS ', response.data.choices[0].text)
 })
