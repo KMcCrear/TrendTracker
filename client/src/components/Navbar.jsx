@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 // import ReorderIcon from "@material-ui/icons/Reorder";
 
-export default function NavBar() {
+function NavBar(props) {
 	const [showLinks, setShowLinks] = useState(false);
+	let tempInput = '';
+
+	const afunc = ((e) => {
+		e.preventDefault();
+		props.setInput(tempInput);
+	})
+
 	return (
 		<div>
 			<div className="Navbar">
@@ -17,11 +24,26 @@ export default function NavBar() {
 					</button>
 				</div>
 				<div className="rightSide">
-					<div className="links" id={showLinks ? "hidden" : ""}>
-						<a href="/login">Login</a>
+					<div className="searchContainer">
+						<form onSubmit={ afunc }>
+							<input
+								type="text"
+								placeholder={"Search Company Ticker"}
+								onChange={(e) => {tempInput=e.target.value}}
+							/>
+							<button type="submit">Button</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
+
+export {NavBar}
+
+/*
+onChange={(e) => setUserQuery(e.target.value)}
+onSubmit={sendUserQuery}
+value={props.input}
+*/
