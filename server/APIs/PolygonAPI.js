@@ -56,7 +56,7 @@ router.get("/search/ticker/:search", (req, res) => {
 
 /**
  * @name SearchNews
- * Searches and returns 
+ * Searches and returns news info related to provided ticker
  */
 router.get("/search/news/:search", (req, res) => {
 	const query = req.params.search;
