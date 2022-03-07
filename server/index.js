@@ -63,12 +63,12 @@ app.post("/data", (req, res) => {
 const twitterapi = require("./APIs/TwitterAPI");
 const polygonapi = require("./APIs/PolygonAPI");
 const marketcapapi = require("./APIs/MarketCapAPI");
-
+const openAiApi = require("./APIs/OpenAiApi");
 //API uses
 app.use("/twitter", twitterapi);
 app.use("/polygon", polygonapi);
 app.use("/marketcap", marketcapapi);
-
+app.use("/openai", openAiApi)
 app.listen(PORT, () => {
 	console.log(`Server Running on Port ${PORT}`);
 });

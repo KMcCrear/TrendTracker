@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
-const { POLYGONAPITOKEN } = require("../config/tokens/PolygonAPIToken.json");
+const { POLYGON_API_TOKEN } = require("../config/APITokens.json");
 
 /**
  * @name SearchTicker
@@ -43,7 +43,7 @@ router.get("/search/ticker/:search", (req, res) => {
 
 	axios({
 		method: "get",
-		url: `https://api.polygon.io/v2/aggs/ticker/${searchQuery}/range/${rangeResolutionMulti}/${rangeResolution}/${dateFrom}/${dateNow}?&sort=asc&limit=${LIMIT}&apiKey=${POLYGONAPITOKEN}`,
+		url: `https://api.polygon.io/v2/aggs/ticker/${searchQuery}/range/${rangeResolutionMulti}/${rangeResolution}/${dateFrom}/${dateNow}?&sort=asc&limit=${LIMIT}&apiKey=${POLYGON_API_TOKEN}`,
 	})
 		.then((response) => {
 			res.send(response.data.results);
@@ -62,7 +62,7 @@ router.get("/search/news/:search", (req, res) => {
 	const query = req.params.search;
 	axios({
 		method: "get",
-		url: `https://api.polygon.io/v2/reference/news?ticker=${query}&apiKey=${POLYGONAPITOKEN}`,
+		url: `https://api.polygon.io/v2/reference/news?ticker=${query}&apiKey=${POLYGON_API_TOKEN}`,
 	})
 		.then((response) => {
 			res.send(response.data.results);
