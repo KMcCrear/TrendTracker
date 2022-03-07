@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require("axios");
 const router = express.Router();
-const {TWITTERAPITOKEN} = require('../config/tokens/TwitterAPIToken.json');
+const {TWITTER_API_TOKEN} = require('../config/APITokens.json');
 
 /**
  * @name SearchRecent
@@ -12,7 +12,7 @@ router.get('/search/recent/:search',(req,res) => {
     axios({
         method: "get",
         headers: {
-            Authorization: `Bearer ${TWITTERAPITOKEN}`,
+            Authorization: `Bearer ${TWITTER_API_TOKEN}`,
         },
         credentials: true,
         url: `https://api.twitter.com/2/tweets/search/recent?query=${query}`,
