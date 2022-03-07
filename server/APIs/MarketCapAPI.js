@@ -1,7 +1,6 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
-const {
 	MARKET_CAP_API_TOKEN,
 } = require("../config/APITokens.json");
 
