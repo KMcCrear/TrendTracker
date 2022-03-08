@@ -8,7 +8,7 @@ const LIMIT = 5000;
 
 /**
  * @name SearchTicker
- * Searches and returns the last week of stock data related to the ticker
+ * Searches and returns the last week of stock data related to the ticker, up to a maximum of 30 data points
  */
 router.get("/search/ticker/:search", (req, res) => {
 	const searchQuery = req.params.search;
@@ -87,13 +87,33 @@ router.get("/search/ticker/:search", (req, res) => {
 
 /**
  * @name SearchNews
- * Searches and returns news info related to provided ticker
+ * Searches and returns up to 10 news items related to provided ticker
  */
 router.get("/search/news/:search", (req, res) => {
 	const query = req.params.search;
 	axios({
 		method: "get",
-		url: `https://api.polygon.io/v2/reference/news?ticker=${query}&limit=${LIMIT}&apiKey=${POLYGON_API_TOKEN}`,
+		url: `https://api.polygon.io/v2/reference/news?ticker=${query}&limit=10&apiKey=${POLYGON_API_TOKEN}`,
+	})
+		.then((response) => {
+			res.send(response.data.results);
+		})
+		.catch((err) => {
+			console.log(new Date().toString().substring(0, 24) + ": " + err.message);
+			res.send(err);
+		});
+});
+
+/**
+ * @name SearchCompany
+ * Searches and returns up to 10 companies related to search query
+ * @see https://polygon.io/docs/stocks/get_v3_reference_tickers
+ */
+router.get("/search/company/:search", (req, res) => {
+	const searchQuery = req.params.search;
+	axios({
+		method: "get",
+		url: `https://api.polygon.io/v3/reference/tickers?market=stocks&search=${searchQuery}&limit=10&apiKey=${POLYGON_API_TOKEN}`,
 	})
 		.then((response) => {
 			res.send(response.data.results);
