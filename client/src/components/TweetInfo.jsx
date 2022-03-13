@@ -38,7 +38,8 @@ const TweetInfo = (props)=>{
 
     return(
         <Card>
-            <Space>
+            <Space direction ='vertical'>
+            <h3>Sentiments</h3>
             <PieChart
                 data={[
                     { title: 'Positive', value: sentiments.positive, color: 'green' },
