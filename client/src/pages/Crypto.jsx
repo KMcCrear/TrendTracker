@@ -8,26 +8,40 @@ export default function Crypto() {
 		const getData = async () => {
 			let anArray = [];
 			const cryptoData = await getCryptoData();
-			renderData(cryptoData.slice(0, 5));
+			renderData(cryptoData.slice(0, 12));
 		};
 		getData();
 	}, []);
 
 	const renderData = (cryptoArray) => {
 		let renderedCrypto = cryptoArray.map((data) => (
-			<div className="loadedCryptoData" key={data.name}>
-				<div className="cryptoData">
-					Name: {data.name} <br />
-					Price: {data.quote.USD.price}
-				</div>
-			</div>
+			<table className="cryptoTable" key={data.name}>
+				<tbody className="loadedCryptoData">
+					<tr className="cryptoData">
+						<td className="dataName">{data.name}</td>
+						<td className="dataPrice">{data.quote.USD.price}</td>
+						<td className="dataVolume">{data.quote.USD.volume_24h}</td>
+						<td className="dataMktCap">{data.quote.USD.market_cap}</td>
+					</tr>
+				</tbody>
+			</table>
 		));
 		setCryptoData(renderedCrypto);
 	};
 
 	return (
 		<div className="cryptoContainer">
-			<h1>Crypto</h1>
+			<h1 className="title">Crypto</h1>
+			<table className="headerTable">
+				<thead className="columns">
+					<tr className="columnData">
+						<th>Coin</th>
+						<th>Price</th>
+						<th>24h Volume</th>
+						<th>Mkt Cap</th>
+					</tr>
+				</thead>
+			</table>
 			{cryptoData}
 		</div>
 	);
