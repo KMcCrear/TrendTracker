@@ -31,7 +31,7 @@ function NavBar(props) {
 								placeholder={"Search Company Ticker"}
 								onChange={(e) => {tempInput=e.target.value}}
 							/>
-							<button type="submit">Button</button>
+							<button type="submit">Search</button>
 						</form>
 					</div>
 				</div>
@@ -41,9 +41,3 @@ function NavBar(props) {
 }
 
 export {NavBar}
-
-/*
-onChange={(e) => setUserQuery(e.target.value)}
-onSubmit={sendUserQuery}
-value={props.input}
-*/
