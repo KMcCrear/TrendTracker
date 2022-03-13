@@ -14,10 +14,12 @@ export default function Crypto() {
 	}, []);
 
 	const renderData = (cryptoArray) => {
+		let count = 0;
 		let renderedCrypto = cryptoArray.map((data) => (
 			<table className="cryptoTable" key={data.name}>
 				<tbody className="loadedCryptoData">
 					<tr className="cryptoData">
+						<td>{(count += 1)}</td>
 						<td className="dataName">{data.name}</td>
 						<td className="dataPrice">{data.quote.USD.price}</td>
 						<td className="dataVolume">{data.quote.USD.volume_24h}</td>
@@ -35,6 +37,7 @@ export default function Crypto() {
 			<table className="headerTable">
 				<thead className="columns">
 					<tr className="columnData">
+						<th>#</th>
 						<th>Coin</th>
 						<th>Price</th>
 						<th>24h Volume</th>

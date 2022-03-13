@@ -89,6 +89,7 @@ button:hover {
 	table-layout: auto;
 	text-align: left;
 	width: 930px;
+	margin-left: 50px;
 }
 
 .cryptoContainer .headerTable .columns {
@@ -119,6 +120,7 @@ button:hover {
 	table-layout: auto;
 	text-align: left;
 	width: 930px;
+	margin-left: 50px;
 }
 
 .cryptoContainer .loadedCryptoData {
