@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "react-apexcharts";
 import makeChartData from "../helpers/makeChartData";
+<<<<<<< HEAD
+=======
+import {Alert} from 'antd'
+>>>>>>> feb35fe4e559778ff1defe86096504bd095fb573
 
 const CandleStick = (props)=>{
 	const {search} =props;
@@ -36,10 +40,11 @@ const CandleStick = (props)=>{
 		fetchData();
 	},[search])
 
-	if(data.length > 0){
+	if(data.length>0){
 	return (
 		<div id="chart">
 			<Chart
+				width={700}
 				options={options.current}
 				series={[{data}]}
 				type="candlestick"
@@ -49,6 +54,6 @@ const CandleStick = (props)=>{
 		</div>
 	);
 	}
-	return(<div>Search for a ticker name to display candle chart</div>)
+	return(<Alert type='warning' message={`No stock data found for ${search}`}/>)
 }
-export { CandleStick };
+export default CandleStick ;
