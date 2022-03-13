@@ -22,7 +22,10 @@ export default function Crypto() {
 						<td>{(count += 1)}</td>
 						<td className="dataName">{data.name}</td>
 						<td className="dataPrice">{data.quote.USD.price}</td>
-						<td className="dataVolume">{data.quote.USD.volume_24h}</td>
+						<td>{Math.round(data.quote.USD.percent_change_1h * 100) / 100}</td>
+						<td>{Math.round(data.quote.USD.percent_change_24h * 100) / 100}</td>
+						<td>{Math.round(data.quote.USD.percent_change_7d * 100) / 100}</td>
+						<td className="dataVolume">${data.quote.USD.volume_24h}</td>
 						<td className="dataMktCap">{data.quote.USD.market_cap}</td>
 					</tr>
 				</tbody>
@@ -33,13 +36,16 @@ export default function Crypto() {
 
 	return (
 		<div className="cryptoContainer">
-			<h1 className="title">Crypto</h1>
+			<h1 className="title">Crypto Prices by Market Cap</h1>
 			<table className="headerTable">
 				<thead className="columns">
 					<tr className="columnData">
 						<th>#</th>
 						<th>Coin</th>
 						<th>Price</th>
+						<th>1h</th>
+						<th>24h</th>
+						<th>7d</th>
 						<th>24h Volume</th>
 						<th>Mkt Cap</th>
 					</tr>
