@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { CandleStick } from "../components/CandleStick";
 
 const Dashboard = (props) => {
-	const chart = <CandleStick ticker={props.search}/>
+	const {search} = props;
+	const chart = <CandleStick search={search}/>
 	return (
 		<div className="dashboardContainer">
 			<h1>Dashboard</h1>
