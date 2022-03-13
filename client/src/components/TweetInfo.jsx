@@ -8,33 +8,41 @@ import { PieChart } from 'react-minimal-pie-chart';
 const TweetInfo = (props)=>{
     const {search} = props;
     
-    const [sentiments, setSentiments] = useState({});
+    const sentiments= {
+        positive: 5,
+        neutral: 10,
+        negative: 8
+    }
 
-    useEffect(()=>{
-        const getSentiments = async()=>{
-            const newTweets = await getTweets(search.toUpperCase());
+    //uncomment the next block if you want to test the sentiment api - careful with the ammount of requests, we have only $18 credit
 
-            const sentimentsRequests = newTweets.data.map((tweet)=>{
-                return getSentiment(search, tweet.text)
-            })
-            const sentimentResponses = await Promise.all(sentimentsRequests);
+    // const [sentiments, setSentiments] = useState({});
 
-            const sentimentsFiltered = {neutral:0, positive:0, negative:0}
-            sentimentResponses.forEach((sentiment)=>{
-                if(sentiment.includes('positive')){
-                    sentimentsFiltered.positive += 1;
-                }   else if(sentiment.includes('negative')){
-                    sentimentsFiltered.negative += 1;
-                }
-                else if(sentiment.includes('neutral')){
-                    sentimentsFiltered.neutral += 1;
-                }
-            }) 
-            setSentiments(sentimentsFiltered);
-        }
+    // useEffect(()=>{
+    //     const getSentiments = async()=>{
+    //         const newTweets = await getTweets(search.toUpperCase());
 
-    getSentiments();
-    },[search])
+    //         const sentimentsRequests = newTweets.data.map((tweet)=>{
+    //             return getSentiment(search, tweet.text)
+    //         })
+    //         const sentimentResponses = await Promise.all(sentimentsRequests);
+
+    //         const sentimentsFiltered = {neutral:0, positive:0, negative:0}
+    //         sentimentResponses.forEach((sentiment)=>{
+    //             if(sentiment.includes('positive')){
+    //                 sentimentsFiltered.positive += 1;
+    //             }   else if(sentiment.includes('negative')){
+    //                 sentimentsFiltered.negative += 1;
+    //             }
+    //             else if(sentiment.includes('neutral')){
+    //                 sentimentsFiltered.neutral += 1;
+    //             }
+    //         }) 
+    //         setSentiments(sentimentsFiltered);
+    //     }
+
+    // getSentiments();
+    // },[search])
 
     return(
         <Card>
