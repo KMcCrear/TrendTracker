@@ -19,7 +19,10 @@ export default function Crypto() {
 			<table className="cryptoTable" key={data.name}>
 				<tbody className="loadedCryptoData">
 					<tr className="cryptoData">
-						<td>{(count += 1)}</td>
+						<td>
+							<button onClick={(e) => console.log("hello")}>Click</button>
+							{(count += 1)}
+						</td>
 						<td className="dataName">{data.name}</td>
 						<td className="dataPrice">{data.quote.USD.price}</td>
 						<td>{Math.round(data.quote.USD.percent_change_1h * 100) / 100}</td>
