@@ -1,12 +1,13 @@
-import { serialize } from "nedb/lib/model";
 import React, { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const Coins = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const { searchParams } = useLocation();
+	const history = useLocation();
+	const query = history.pathname;
 
 	useEffect(() => {
-		console.log(searchParams);
+		console.log(query.slice(7));
 	}, [searchParams]);
 
 	return <div>Coins bro</div>;
