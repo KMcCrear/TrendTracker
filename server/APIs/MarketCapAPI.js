@@ -20,7 +20,7 @@ router.get("/trending/latest", (req, res) => {
 			"X-CMC_PRO_API_KEY": ` ${MARKET_CAP_API_TOKEN}`,
 		},
 		credentials: true,
-		url: `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest`,
+		url: `https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest`,
 	})
 		.then((response) => {
 			res.send(response.data.data);
