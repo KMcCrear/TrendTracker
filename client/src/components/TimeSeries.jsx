@@ -8,7 +8,7 @@ class TimeSeries extends React.Component {
 		this.state = {
 			series: [
 				{
-					name: props.name,
+					name: "Price",
 					data: props.data,
 				},
 			],
