@@ -64,12 +64,14 @@ const twitterapi = require("./APIs/TwitterAPI");
 const polygonapi = require("./APIs/PolygonAPI");
 const marketcapapi = require("./APIs/MarketCapAPI");
 const openAiApi = require("./APIs/OpenAIAPI");
+const coingeckoapi = require("./APIs/CoinGeckoAPI");
 
 //API uses
 app.use("/twitter", twitterapi);
 app.use("/polygon", polygonapi);
 app.use("/marketcap", marketcapapi);
 app.use("/openai", openAiApi);
+app.use("/coingecko", coingeckoapi);
 
 app.listen(PORT, () => {
 	console.log(`Server Running on Port ${PORT}`);
