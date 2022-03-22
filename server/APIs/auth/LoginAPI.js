@@ -1,12 +1,9 @@
-const express = require("express");
-const router = express.Router();
-
 const auth = require("basic-auth");
 
-router.post('/',(req,res) => {
+exports.login = ((req,res) => {
 	const credentials = auth(req);
 	if (!credentials) {
-		res.status(401).end('Incorrect credentials');
+		res.status(400).end('Incorrect credentials');
 	}
 	else {
 		req.session.user = 'hi';
@@ -14,4 +11,6 @@ router.post('/',(req,res) => {
 	}	
 })
 
-module.exports = router;
+exports.logout = ((req,res) => {
+
+})
