@@ -47,14 +47,16 @@ const TweetInfo = (props)=>{
     return(
         <Card>
             <Space direction ='vertical'>
-            <h3>Sentiments</h3>
+            <h3>Opinion on twitter based on tweet information</h3>
             <PieChart
+            label={({ dataEntry }) => `${dataEntry.title} - ${Math.round(dataEntry.percentage)} %`}
+            labelStyle={{fontSize: '3px'}}
                 data={[
                     { title: 'Positive', value: sentiments.positive, color: 'green' },
                     { title: 'Negative', value: sentiments.negative, color: 'red' },
                     { title: 'Neutral', value: sentiments.neutral, color: 'grey' },
                 ]}
-                />;
+                />
             </Space>
         </Card>
     )

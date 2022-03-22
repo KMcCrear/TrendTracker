@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "react-apexcharts";
 import makeChartData from "../helpers/makeChartData";
-<<<<<<< HEAD
-=======
 import {Alert} from 'antd'
->>>>>>> feb35fe4e559778ff1defe86096504bd095fb573
 
 const CandleStick = (props)=>{
 	const {search} =props;
