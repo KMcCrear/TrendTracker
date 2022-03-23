@@ -20,7 +20,9 @@ export default function Crypto() {
 				<tbody className="loadedCryptoData">
 					<tr className="cryptoData">
 						<td>{(count += 1)}</td>
-						<td className="dataName">{data.name}</td>
+						<td className="dataName">
+							<a href={`/coins/${data.name}`}>{data.name}</a>
+						</td>
 						<td className="dataPrice">{data.quote.USD.price}</td>
 						<td>{Math.round(data.quote.USD.percent_change_1h * 100) / 100}</td>
 						<td>{Math.round(data.quote.USD.percent_change_24h * 100) / 100}</td>
