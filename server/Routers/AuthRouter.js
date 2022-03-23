@@ -20,11 +20,12 @@ router.use(
 
 const loginapi = require('../APIs/auth/LoginAPI');
 
-router.post('/login',loginapi.login);
-router.post('/logout',loginapi.logout)
+router.post('/login',loginapi.login(db));
+router.post('/logout',loginapi.logout(db))
 
 router.use((req,res,next) => {
     if (req.session.user) {
+		req.db = db;
         next();
     }
     else {
