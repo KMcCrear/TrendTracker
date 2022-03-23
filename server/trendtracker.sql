@@ -8,7 +8,7 @@ CREATE TABLE users (
     forename VARCHAR(32) NOT NULL,
     surname VARCHAR(32) NOT NULL,
     username VARCHAR(32) NOT NULL,
-    password VARCHAR(60), -- will be not null once ive generated test data
+    password VARCHAR(60) NOT NULL,
     INDEX (username),
     PRIMARY KEY (userID)
 );
@@ -29,10 +29,10 @@ CREATE TABLE userwatchlist (
 );
 
 /* TEST DATA */
-INSERT INTO users (forename,surname,username) VALUES
-('Ray','Sweekend','raysweekend'),
-('Boris','Johnson','bojonno1'),
-('Nicola','Sturgeon','bigupscotland');
+INSERT INTO users (forename,surname,username,password) VALUES
+('Ray','Sweekend','raysweekend','$2b$10$vdaIImRMl4JEBc5sQNG8W.tX7Mxc/MS8GciB.77lG/VAKujLxztG6'), -- password 'car go fast'
+('Boris','Johnson','bojonno1','$2b$10$cL/TvdKV.E1iUKiWAusduePhgvgflVRM9FJvaLmsau5qFWH8EgBjy'), -- password 'bluepassport'
+('Nicola','Sturgeon','bigupscotland','$2b$10$THgEuTNdlx7TsIxIz4iq8O7dLOKdj2wV1WnBLyvArdi2SDl62CHAW'); -- password 'independence'
 
 INSERT INTO watchlist (what,identifier) VALUES
 ('stock','AAPL'),
