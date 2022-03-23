@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const mysql = require('mysql');
+const mysqlconfig = require('../config/mysqlconfig.json')
+const db = mysql.createPool(mysqlconfig)
 const session = require('express-session');
 
 router.use(
