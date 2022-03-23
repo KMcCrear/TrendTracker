@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS users;
-CREATE DATABASE users;
-USE users;
+DROP DATABASE IF EXISTS trendtracker;
+CREATE DATABASE trendtracker;
+USE trendtracker;
 
 /* TABLES */
 CREATE TABLE users (
