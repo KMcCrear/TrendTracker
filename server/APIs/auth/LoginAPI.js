@@ -14,7 +14,7 @@ exports.login = function(db) {
 			res.status(401).set('WWW-Authenticate', 'Basic realm="Access to user section", charset="UTF-8"').end("Invalid or no credentials provided");
 		}
 		else {
-			db.query(`CALL getUser('${credentials.name}')`,(err,results,fields) => {
+			db.query('CALL getUser(?)',credentials.name,(err,results,fields) => {
 				if (err) {res.status(500).end(); return}
 				if (results[0].length == 0) {res.status(401).end('Invalid uername or password'); return}
 
