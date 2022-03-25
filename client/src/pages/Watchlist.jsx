@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import getWatchlist from "../helpers/getWatchlist";
 
 const Watchlist = () => {
-    const [watchlist, setWatchlist] = useState("");
+    const [watchlist, setWatchlist] = useState([]);
     useEffect(() => {
         getWatchlist().then((data) => {
             let renderedData = data.map((d) => (
@@ -10,11 +10,20 @@ const Watchlist = () => {
                     <td>{d.what}</td>
                     <td>{d.identifier}</td>
                     <td><a href={'/'}>View</a></td>
+                    <td><a onClick={remove.bind(null,d.listID)}>Remove</a></td>
                 </tr>
             ))
             setWatchlist(renderedData);
-        }).catch((e) => {console.log(e)})
+        }).catch((e) => {console.log(e)})   
+
+        function remove(id) {
+            //this doesnt work, watchlist is empty despite it being set previously
+            const newWatchlist = watchlist.filter(row => row.key != id);
+            setWatchlist(newWatchlist);
+        }   
     },[])
+
+    
 
     return (
         <div>
