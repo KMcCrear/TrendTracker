@@ -5,6 +5,7 @@ import { Dashboard } from "./pages/Dashboard";
 import Stocks from "./pages/Stocks";
 import Crypto from "./pages/Crypto";
 import Coins from "./pages/Coins";
+import Portfolio from "./pages/Portfolio";
 import { useState } from "react";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 				<Route exact path="/" element={<Dashboard search={input} />} />
 				<Route path="/Stocks" element={<Stocks search={input} />} />
 				<Route path="/crypto" element={<Crypto search={input} />} />
+				<Route path="/portfolio" element={<Portfolio />} />
 				<Route path="/coins/:coin" element={<Coins search={input} />} />
 			</Routes>
 		</div>
