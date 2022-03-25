@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(
 	cors({
 		origin: [`${HOST}:${PORT-1}`],
-		methods: ["GET", "POST", "PUT"],
+		methods: ["GET", "POST", "PUT","DELETE"],
 		credentials: true
 	})
 );
