@@ -60,4 +60,19 @@ BEGIN
     JOIN userwatchlist ON users.userID=userwatchlist.userID
     JOIN watchlist ON userwatchlist.listID=watchlist.listID
     WHERE users.userID = inUserID;
+<<<<<<< HEAD
+=======
+END$$
+
+CREATE PROCEDURE addToWatchlist(IN inUserID INT, IN inWhat ENUM('stock','crypto'), IN inIdentifier VARCHAR(16))
+BEGIN
+    INSERT INTO watchlist (what, identifier)
+    SELECT inWhat, inIdentifier
+    WHERE NOT(inIdentifier IN (SELECT identifier FROM watchlist));
+
+    INSERT INTO userwatchlist (userID,listID)
+    SELECT inUserID, listID
+    FROM watchlist
+    WHERE listID = (SELECT listID FROM watchlist WHERE identifier = inIdentifier);
+>>>>>>> a5b98dbf44a0582eeaa736b3c1f4f540a05328d5
 END$$

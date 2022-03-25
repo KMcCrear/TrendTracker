@@ -11,7 +11,11 @@ router.use(
 		secret: 'thisisaverysecretvaluesubjecttochange',
 		resave: false,
 		saveUninitialized: false,
+<<<<<<< HEAD
 		name: 'trendtracker',
+=======
+		name: 'sessionid',
+>>>>>>> a5b98dbf44a0582eeaa736b3c1f4f540a05328d5
 		cookie: {
 			secure: false
 		}
