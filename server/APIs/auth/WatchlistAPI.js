@@ -10,16 +10,16 @@ router.get('/get',(req,res) => {
 
 router.post('/add/:type/:id', (req,res) => {
 	const type = req.params.type;
-	const id = req.params.id;
-	req.db.query('CALL addToWatchlist(?,?,?)', [req.session.user.userID, type, id],(err,results,fields) => {
+	const identifier = req.params.id;
+	req.db.query('CALL addToWatchlist(?,?,?)', [req.session.user.userID, type, identifier],(err,results,fields) => {
 		if (err) {res.status(500).end(); return};
 		res.status(201).end();
 	})
 })
 
 router.delete('/delete/:listID', (req,res) => {
-	const id = req.params.listID;
-	req.db.query('CALL deleteFromWatchlist(?,?)', [req.session.user.userID, id],(err,results,fields) => {
+	const listID = req.params.listID;
+	req.db.query('CALL deleteFromWatchlist(?,?)', [req.session.user.userID, listID],(err,results,fields) => {
 		if (err) {res.status(500).end(); return};
 		res.end();
 	})
