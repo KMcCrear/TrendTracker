@@ -27,6 +27,7 @@ exports.login = function(db) {
 							forename: user.forename,
 							surname: user.surname
 						}
+						res.cookie('user',JSON.stringify({forename: user.forename, surname: user.surname}));
 						res.status(200).end('Successfully logged in');
 					}
 					else {
