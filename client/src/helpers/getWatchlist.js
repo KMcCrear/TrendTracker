@@ -3,8 +3,8 @@ import endPoint from "../helpers/endPoint";
 
 const getWatchlist = () => {
 	return axios
-		.get(`${endPoint()}/auth/watchlist/get/`,{
-			withCredentials: true
+		.get(`${endPoint()}/auth/watchlist/getUserWatchList/`, {
+			withCredentials: true,
 		})
 		.then((response) => response.data);
 };

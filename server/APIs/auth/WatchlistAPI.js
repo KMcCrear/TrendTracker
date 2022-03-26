@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/get", (req, res) => {
+router.get("/getUserWatchList", (req, res) => {
 	req.db.query(
 		"CALL getUserwatchlist(?)",
 		req.session.user.userID,
