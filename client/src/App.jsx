@@ -19,7 +19,8 @@ function App() {
 
 			<Routes>
 				<Route exact path="/" element={<Dashboard search={input} />} />
-				<Route path="/Stocks" element={<Stocks search={input} />} />
+				<Route path="/stocks" element={<Stocks search={input} />} />
+				<Route path="/stocks/:ticker" element={<Stocks search={input} />} />
 				<Route path="/crypto" element={<Crypto search={input} />} />
 				<Route path="/coins/:coin" element={<Coins search={input} />} />
 				<Route path="/watchlist" element={<Watchlist search={input} />} />

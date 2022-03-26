@@ -27,7 +27,7 @@ export default function Portfolio(props) {
 						<tr className="stockData">
 							<td>{(count += 1)}</td>
 							<td className="dataName">
-								<a href={`/stock/${data}`}>{data}</a>
+								<a href={`/stocks/${data}`}>{data}</a>
 							</td>
 							<td className="dataPrice">{0}</td>
 						</tr>
@@ -45,6 +45,7 @@ export default function Portfolio(props) {
 								<a href={`/coins/${data}`}>{data}</a>
 							</td>
 							<td className="dataPrice">{0}</td>
+							<button>-</button>
 						</tr>
 					</tbody>
 				</table>
