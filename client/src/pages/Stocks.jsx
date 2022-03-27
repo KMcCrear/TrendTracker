@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import getFinanceData from "../helpers/getFinanceData";
 import CandleStick from "../components/CandleStick";
+import addToWatchList from "../helpers/addToWatchList";
 
 export default function Stocks() {
 	const history = useLocation();
@@ -16,9 +17,12 @@ export default function Stocks() {
 		}
 	});
 
-	const addToWatchList = () => {
-		//Method will call a helper to pass the userID type: stock and ID:ticker
-		console.log(query);
+	const addStockToWatchList = (e) => {
+		e.preventDefault();
+		const watchListID = query.toLowerCase().trim();
+		addToWatchList("stock", watchListID).then((response) => {
+			console.log(response);
+		});
 	};
 
 	if (query) {
@@ -26,7 +30,9 @@ export default function Stocks() {
 			<div className="stocksContainer">
 				<h1>Stocks</h1>
 				<CandleStick search={query} />
-				<button onClick={addToWatchList}>Add Ticker to Watch List</button>
+				<button onClick={(e) => addStockToWatchList(e)}>
+					Add Ticker to Watch List
+				</button>
 			</div>
 		);
 	} else {
