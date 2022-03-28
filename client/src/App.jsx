@@ -47,7 +47,6 @@ const App = () => {
 				<Route path="/stocks/:ticker" element={<Stocks search={input} />} />
 				<Route path="/crypto" element={<Crypto search={input} />} />
 				<Route path="/coins/:coin" element={<Coins search={input} />} />
-				<Route path="/watchlist" element={<Watchlist search={input} />} />
 				<Route path="/portfolio" element={<Portfolio state={state} />} />
 			</Routes>
 		</div>
