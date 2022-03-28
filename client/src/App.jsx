@@ -17,8 +17,6 @@ const App = () => {
 	const [input, setInput] = useState();
 	const [state, setNewState] = useState({
 		loggedIn: false,
-		id: null,
-		email: null,
 		firstname: null,
 		surname: null,
 		message: null,
