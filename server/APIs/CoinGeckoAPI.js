@@ -21,4 +21,19 @@ router.get("/coins/market_chart/:search", (req, res) => {
 		});
 });
 
+router.get("/coins/id/:search", (req, res) => {
+	const query = req.params.search;
+	axios({
+		method: "get",
+		url: `https://api.coingecko.com/api/v3/coins/${query}?localization=false&tickers=true&market_data=true`,
+	})
+		.then((response) => {
+			res.send(response.data);
+		})
+		.catch((err) => {
+			console.log(new Date().toString().substring(0, 24) + ": " + err.message);
+			res.send(err);
+		});
+});
+
 module.exports = router;
