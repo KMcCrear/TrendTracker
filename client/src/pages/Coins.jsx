@@ -3,7 +3,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import getCoinData from "../helpers/getCoinData";
 import TimeSeries from "../components/TimeSeries";
 import TweetInfo from "../components/TweetInfo";
-import addToWatchList from "../helpers/addToWatchList";
+import addToWatchList from "../helpers/addToWatchlist";
 import { Space } from "antd";
 
 const Coins = () => {
