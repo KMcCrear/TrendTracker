@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import getFinanceData from "../helpers/getFinanceData";
 import CandleStick from "../components/CandleStick";
-import addToWatchList from "../helpers/addToWatchList";
+import addToWatchList from "../helpers/addToWatchlist";
 
 export default function Stocks() {
 	const history = useLocation();

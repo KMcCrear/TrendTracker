@@ -73,3 +73,9 @@ BEGIN
     FROM watchlist
     WHERE listID = (SELECT listID FROM watchlist WHERE identifier = inIdentifier);
 END$$
+
+CREATE PROCEDURE deleteFromWatchlist(IN inUserID INT, IN inListID INT)
+BEGIN
+    DELETE FROM userwatchlist
+    WHERE userID = inUserID AND listID = inListID;
+END$$

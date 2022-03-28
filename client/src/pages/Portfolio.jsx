@@ -1,56 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import deleteFromWatchlist from "../helpers/deleteFromWatchlist";
 import getWatchlist from "../helpers/getWatchlist";
-import { Space } from "antd";
 export default function Portfolio(props) {
 	const { state } = props;
 	const [stockData, setStockData] = useState();
 	const [cryptoData, setCryptoData] = useState();
+	const actualStockData = useRef([]);
+	const actualCryptoData = useRef([]);
+
+	const table = (array) => {
+		let count = 1;
+		return (
+			array.map((data) => (
+				<tr className={`${data.what}Row`} key={data.listID}>
+					<td>{count++}</td>
+					<td className="dataName">
+						<a href={`/${data.what}/${data.identifier}`}>{data.identifier}</a>
+					</td>
+				<td className="dataPrice">{0}</td>
+				<td><a onClick={() => remove(data)}>Remove</a></td>
+			</tr>
+			))
+		)
+	}
+
+	const remove = (data) => {
+		const id = data.listID;
+		deleteFromWatchlist(id).then(() => {
+			if (data.what === "stock") {
+				actualStockData.current = actualStockData.current.filter(row => row.key != id)
+				setStockData(actualStockData.current)
+			}
+			else {
+				actualCryptoData.current = actualCryptoData.current.filter(row => row.key != id)
+				setCryptoData(actualCryptoData)
+			}
+		}).catch((err) => {
+			console.log(err);
+			alert('Unable');
+		})
+	}
 
 	useEffect(() => {
 		getWatchlist().then((data) => {
-			let count = 0;
-			console.log(data);
-			let stockArray = [];
-			let cryptoArray = [];
-
-			data.forEach((entry) => {
-				if (entry.what === "stock") {
-					stockArray.push(entry.identifier);
-				} else {
-					cryptoArray.push(entry.identifier);
-				}
-			});
-
-			let renderStockData = stockArray.map((data) => (
-				<table className="stockTable" key={data}>
-					<tbody className="loadedStockData">
-						<tr className="stockData">
-							<td>{(count += 1)}</td>
-							<td className="dataName">
-								<a href={`/stocks/${data}`}>{data}</a>
-							</td>
-							<td className="dataPrice">{0}</td>
-						</tr>
-					</tbody>
-				</table>
-			));
-			setStockData(renderStockData);
-
-			let renderCryptoData = cryptoArray.map((data) => (
-				<table className="cryptoTable" key={data}>
-					<tbody className="loadedCryptokData">
-						<tr className="cryptoData">
-							<td>{(count += 1)}</td>
-							<td className="dataName">
-								<a href={`/coins/${data}`}>{data}</a>
-							</td>
-							<td className="dataPrice">{0}</td>
-							<button>-</button>
-						</tr>
-					</tbody>
-				</table>
-			));
-			setCryptoData(renderCryptoData);
+			actualStockData.current = table(data.filter(d => d.what === 'stock'));
+			actualCryptoData.current = table(data.filter(d => d.what === 'crypto'));
+			setStockData(actualStockData.current);
+			setCryptoData(actualCryptoData.current);
 		});
 	}, []);
 
@@ -58,7 +54,7 @@ export default function Portfolio(props) {
 		<div className="portfolioContainer">
 			<h1>User Portfolio</h1>
 
-			<table className="headerStockTable">
+			<table className="stockTable">
 				<thead className="columns">
 					<tr className="columnData">
 						<th>#</th>
@@ -66,9 +62,9 @@ export default function Portfolio(props) {
 						<th>Price</th>
 					</tr>
 				</thead>
+				<tbody className="loadedStockData">{stockData}</tbody>
 			</table>
-			{stockData}
-			<table className="headerCryptoTable">
+			<table className="cryptoTable">
 				<thead className="columns">
 					<tr className="columnData">
 						<th>#</th>
@@ -76,8 +72,8 @@ export default function Portfolio(props) {
 						<th>Price</th>
 					</tr>
 				</thead>
-			</table>
-			{cryptoData}
+				<tbody className="loadedCryptoData">{cryptoData}</tbody>
+			</table>		
 		</div>
 	);
 }
