@@ -6,7 +6,6 @@ import Stocks from "./pages/Stocks";
 import Crypto from "./pages/Crypto";
 import Coins from "./pages/Coins";
 import Portfolio from "./pages/Portfolio";
-import Watchlist from "./pages/Watchlist";
 import { useState } from "react";
 import { useEffect } from "react";
 import updateOnLogin from "./helpers/updateOnLogin";
