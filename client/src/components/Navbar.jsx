@@ -1,14 +1,15 @@
 import React, { useRef, useState } from "react";
+import login from "../helpers/login";
 // import ReorderIcon from "@material-ui/icons/Reorder";
 
 function NavBar(props) {
 	const [showLinks, setShowLinks] = useState(false);
-	let tempInput = '';
+	let tempInput = "";
 
-	const afunc = ((e) => {
+	const afunc = (e) => {
 		e.preventDefault();
 		props.setInput(tempInput);
-	})
+	};
 
 	return (
 		<div>
@@ -18,6 +19,10 @@ function NavBar(props) {
 						<a href="/">Dashboard</a>
 						<a href="/stocks">Stocks</a>
 						<a href="/crypto">Crypto</a>
+						<a onClick={login.bind(null, "raysweekend", "car go fast")}>
+							Login
+						</a>
+						<a href="/portfolio">Portfolio</a>
 					</div>
 					<button onClick={() => setShowLinks(!showLinks)}>
 						{/* <ReorderIcon /> */}
@@ -25,11 +30,13 @@ function NavBar(props) {
 				</div>
 				<div className="rightSide">
 					<div className="searchContainer">
-						<form onSubmit={ afunc }>
+						<form onSubmit={afunc}>
 							<input
 								type="text"
 								placeholder={"Search Company Ticker"}
-								onChange={(e) => {tempInput=e.target.value}}
+								onChange={(e) => {
+									tempInput = e.target.value;
+								}}
 							/>
 							<button type="submit">Search</button>
 						</form>
@@ -40,4 +47,4 @@ function NavBar(props) {
 	);
 }
 
-export {NavBar}
+export { NavBar };
