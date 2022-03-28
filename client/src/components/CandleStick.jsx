@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "react-apexcharts";
 import makeChartData from "../helpers/makeChartData";
+import cookies from "js-cookie"
 import {Alert} from 'antd'
+import addToWatchlist from "../helpers/addToWatchlist";
+import axios from "axios";
 
 const CandleStick = (props)=>{
 	const {search} =props;
@@ -38,18 +41,23 @@ const CandleStick = (props)=>{
 	},[search])
 
 	if(data.length>0){
-	return (
-		<div id="chart">
-			<Chart
-				width={700}
-				options={options.current}
-				series={[{data}]}
-				type="candlestick"
-				height={350}
-			/>
-			<button onClick={updateData}>Refresh</button>
-		</div>
-	);
+		let button;
+		if (cookies.get('user')) {
+			button = <button onClick={() => addToWatchlist(search,'stock')}>Add to watchlist</button>
+		}
+		return (
+			<div id="chart">
+				<Chart
+					width={700}
+					options={options.current}
+					series={[{data}]}
+					type="candlestick"
+					height={350}
+				/>
+				<button onClick={updateData}>Refresh</button>
+				{button}
+			</div>
+		);
 	}
 	return(<Alert type='warning' message={`No stock data found for ${search}`}/>)
 }

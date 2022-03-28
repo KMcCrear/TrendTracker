@@ -9,6 +9,7 @@ const login = (username,password) => {
             username: username,
             password: password
         },
+        responseType: 'text',
         withCredentials: true
     }).then((response) => response.data);
 };

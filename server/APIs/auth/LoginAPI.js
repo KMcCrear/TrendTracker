@@ -39,11 +39,12 @@ exports.login = function (db) {
 						req.session.user = {
 							userID: user.userID,
 							forename: user.forename,
-							surname: user.surname,
-						};
-						res.status(200).end("Successfully logged in");
-					} else {
-						res.status(401).end("Invalid username or password");
+							surname: user.surname
+						}
+						res.status(200).send({forename: user.forename, surname: user.surname}).end('Successfully logged in');
+					}
+					else {
+						res.status(401).end('Invalid username or password');
 					}
 				});
 			});
