@@ -8,7 +8,6 @@ import Coins from "./pages/Coins";
 import Portfolio from "./pages/Portfolio";
 import { useState } from "react";
 import { useEffect } from "react";
-import updateOnLogin from "./helpers/updateOnLogin";
 import endPoint from "./helpers/endPoint";
 import axios from "axios";
 
@@ -16,29 +15,30 @@ const App = () => {
 	const [input, setInput] = useState();
 	const [state, setNewState] = useState({
 		loggedIn: false,
-		firstname: null,
+		forename: null,
 		surname: null,
-		message: null,
+		message: null
 	});
-	axios.defaults.withCredentials = true;
 
 	useEffect(() => {
-		if (state.loggedIn) {
-			return;
+		if (!state.loggedIn) {
+			axios.get(`${endPoint()}/auth/login`,{withCredentials: true}).then((response) => {
+				if (response.data != '') {
+					const user = response.data;
+					setNewState({
+						loggedIn: true, 
+						forename: user.forename, 
+						surname: user.surname,
+						message: `Welcome ${user.forename} ${user.surname}`
+					})
+				}
+			});
 		}
-		axios.get(`${endPoint()}/auth/login`).then((response) => {
-			console.log("response was ", response.data);
-			if (response.data.loggedIn === true) {
-				updateOnLogin(onUpdate, response.data.user[0]);
-			}
-		});
 	}, [state.loggedIn]);
-
-	const onUpdate = (object) => {};
 
 	return (
 		<div className="App">
-			<NavBar input={input} setInput={setInput} />
+			<NavBar input={input} setInput={setInput} state={state}/>
 
 			<Routes>
 				<Route exact path="/" element={<Dashboard search={input} />} />
