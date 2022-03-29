@@ -62,6 +62,14 @@ BEGIN
     WHERE users.userID = inUserID;
 END$$
 
+CREATE PROCEDURE getUserwatchlistItem(IN inUserID INT, IN inIdentifier VARCHAR(16)) 
+BEGIN
+    SELECT watchlist.listID,watchlist.what,watchlist.identifier FROM users
+    JOIN userwatchlist ON users.userID=userwatchlist.userID
+    JOIN watchlist ON userwatchlist.listID=watchlist.listID
+    WHERE users.userID = inUserID AND watchlist.identifier = inIdentifier;
+END$$
+
 CREATE PROCEDURE addToWatchlist(IN inUserID INT, IN inWhat ENUM('stock','crypto'), IN inIdentifier VARCHAR(16))
 BEGIN
     INSERT INTO watchlist (what, identifier)
@@ -74,8 +82,8 @@ BEGIN
     WHERE listID = (SELECT listID FROM watchlist WHERE identifier = inIdentifier);
 END$$
 
-CREATE PROCEDURE deleteFromWatchlist(IN inUserID INT, IN inListID INT)
+CREATE PROCEDURE deleteFromWatchlist(IN inUserID INT, IN inIdentifier VARCHAR(16))
 BEGIN
     DELETE FROM userwatchlist
-    WHERE userID = inUserID AND listID = inListID;
+    WHERE userID = inUserID AND listID = (SELECT listID FROM watchlist WHERE identifier = inIdentifier);
 END$$
