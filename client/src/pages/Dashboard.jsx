@@ -15,7 +15,7 @@ const Dashboard = (props) => {
 			<div className="dashboardContainer">
 				<h1>Dashboard</h1>
 				<Space direction="horizontal" style={{ width: "100%" }}>
-					<CandleStick search={search} state={state}/>
+					<CandleStick search={search} state={state} what="stock"/>
 					<TweetInfo search={search} />
 				</Space>
 				<NewsInfo search={search} />
