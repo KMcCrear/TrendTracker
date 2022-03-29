@@ -41,7 +41,7 @@ const App = () => {
 			<NavBar input={input} setInput={setInput} state={state}/>
 
 			<Routes>
-				<Route exact path="/" element={<Dashboard search={input} />} />
+				<Route exact path="/" element={<Dashboard search={input} state={state}/>} />
 				<Route path="/stocks" element={<Stocks search={input} />} />
 				<Route path="/stocks/:ticker" element={<Stocks search={input} />} />
 				<Route path="/crypto" element={<Crypto search={input} />} />
