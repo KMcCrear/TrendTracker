@@ -162,6 +162,15 @@ button:hover {
 	justify-content: right;
 }
 
+div#chartButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+div#chart {
+    width: fit-content;
+}
+
 @media only screen and (max-width: 850px) {
 	.Navbar .leftSide .links a {
 		font-size: 20px;
