@@ -7,10 +7,11 @@ import hasWatchlistItem from "../helpers/hasWatchlistItem";
 import deleteFromWatchlist from "../helpers/deleteFromWatchlist";
 
 const CandleStick = (props)=>{
-	const search = props.search?.toUpperCase();
+	const propSearch = props.search?.toUpperCase();
 	const { state } = props;
 	const { what } = props;
 
+	const [search,setSearch] = useState(propSearch);
 	const [portfolioButton,setPortfolioButton] = useState();
 	const [data,setData] = useState([])
 	const options = useRef({
@@ -75,8 +76,21 @@ const CandleStick = (props)=>{
 					type="candlestick"
 					height={350}
 				/>
-				<button onClick={updateData}>Refresh</button>
-				{portfolioButton}
+				<div id="chartButtons">
+					<div>
+						<button onClick={updateData}>Refresh</button>
+						{portfolioButton}
+					</div>
+					<div>
+						<button onClick={() => setSearch(propSearch)}>1d</button>
+						<button onClick={() => setSearch(propSearch + '?range=week')}>7d</button>
+						<button onClick={() => setSearch(propSearch + '?range=month')}>30d</button>
+						<button onClick={() => setSearch(propSearch + '?range=quarter')}>90d</button>
+						<button onClick={() => setSearch(propSearch + '?range=year')}>1y</button>
+						<button onClick={() => setSearch(propSearch + '?range=2year')}>2y</button>
+					</div>
+				</div>
+				
 			</div>
 		);
 	}
