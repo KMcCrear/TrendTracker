@@ -6,8 +6,7 @@ import Stocks from "./pages/Stocks";
 import Crypto from "./pages/Crypto";
 import Coins from "./pages/Coins";
 import Portfolio from "./pages/Portfolio";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import endPoint from "./helpers/endPoint";
 import axios from "axios";
 
@@ -42,10 +41,10 @@ const App = () => {
 
 			<Routes>
 				<Route exact path="/" element={<Dashboard search={input} state={state}/>} />
-				<Route path="/stocks" element={<Stocks search={input} />} />
-				<Route path="/stocks/:ticker" element={<Stocks search={input} />} />
-				<Route path="/crypto" element={<Crypto search={input} />} />
-				<Route path="/coins/:coin" element={<Coins search={input} />} />
+				<Route path="/stock" element={<Stocks search={input} state={state}/>} />
+				<Route path="/stock/:ticker" element={<Stocks search={input} state={state} />} />
+				<Route path="/crypto" element={<Crypto search={input} />} state={state}/>
+				<Route path="/coins/:coin" element={<Coins search={input} state={state}/>} />
 				<Route path="/portfolio" element={<Portfolio state={state} />} />
 			</Routes>
 		</div>
