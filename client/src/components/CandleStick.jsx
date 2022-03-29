@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "react-apexcharts";
 import makeChartData from "../helpers/makeChartData";
-import cookies from "js-cookie"
 import {Alert} from 'antd'
 import addToWatchlist from "../helpers/addToWatchlist";
 import axios from "axios";
 
 const CandleStick = (props)=>{
 	const {search} =props;
+	const {state} = props;
 	const [data,setData] = useState([])
 	const options = useRef({
 		chart: {
@@ -42,8 +42,8 @@ const CandleStick = (props)=>{
 
 	if(data.length>0){
 		let button;
-		if (cookies.get('user')) {
-			button = <button onClick={() => addToWatchlist(search,'stock')}>Add to watchlist</button>
+		if (state.loggedIn) {
+			button = <button onClick={() => addToWatchlist(search,'stock')}>Add to portfolio</button>
 		}
 		return (
 			<div id="chart">
