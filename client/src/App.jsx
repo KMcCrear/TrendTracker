@@ -10,34 +10,22 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
 import { useEffect } from "react";
-import updateOnLogin from "./helpers/updateOnLogin";
 import endPoint from "./helpers/endPoint";
 import axios from "axios";
+import jscookie from "js-cookie"
 
 const App = () => {
 	const [input, setInput] = useState();
-	const [state, setNewState] = useState({
-		loggedIn: false,
-		forename: null,
-		surname: null,
-		message: null
-	});
 
-	useEffect(() => {
-		if (!state.loggedIn) {
-			axios.get(`${endPoint()}/auth/login`,{withCredentials: true}).then((response) => {
-				if (response.data != '') {
-					const user = response.data;
-					setNewState({
-						loggedIn: true, 
-						forename: user.forename, 
-						surname: user.surname,
-						message: `Welcome ${user.forename} ${user.surname}`
-					})
-				}
-			});
-		}
-	}, [state.loggedIn]);
+	//getting state from cookies
+	let s = jscookie.get('state');
+	if (s) {
+		s = JSON.parse(s)
+	}
+	else {
+		s = {loggedIn: false}
+	}
+	const state = s;
 
 	return (
 		<div className="App">

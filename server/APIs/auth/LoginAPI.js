@@ -1,8 +1,6 @@
 const express = require('express');
 const auth = require("basic-auth");
 const bcrypt = require("bcrypt");
-const express = require("express");
-const router = express.Router();
 
 module.exports = function(database) {
 	const router = express.Router();
@@ -32,7 +30,7 @@ module.exports = function(database) {
 					return;
 				}
 
-				let user = results[0][0];
+				const user = results[0][0];
 
 				bcrypt.compare(credentials.pass, user.password).then((result) => {
 					if (result) {
@@ -43,7 +41,7 @@ module.exports = function(database) {
 						};
 						res
 							.status(200)
-							.send({ forename: user.forename, surname: user.surname })
+							.cookie('state',JSON.stringify({ loggedIn: true, forename: user.forename, surname: user.surname }))
 							.end("Successfully logged in");
 					} else {
 						res.status(401).end("Invalid username or password");
@@ -56,7 +54,10 @@ module.exports = function(database) {
 	router.get('/login',(req,res) => {
 		if (req.session.user) {
 			const user = req.session.user;
-			res.status(200).send({forename: user.forename, surname: user.surname}).end();
+			res
+			.status(200)
+			.cookie('state',{ loggedIn: true, forename: user.forename, surname: user.surname })
+			.end();
 		}
 		else {
 			res.status(200).end();
