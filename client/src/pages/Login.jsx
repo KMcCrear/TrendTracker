@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import {} from "react-router-dom";
 import axios from "axios";
 import Register from "./Register";
 import { Typography } from "antd";
@@ -10,7 +10,7 @@ const { Title } = Typography;
 
 const Login = (props) => {
 	const { state, onUpdate } = props;
-	const history = useHistory();
+	//const history = useHistory();
 
 	const [password, setPassword] = useState(null);
 	const [loginStatus, setLoginStatus] = useState("");
@@ -29,7 +29,7 @@ const Login = (props) => {
 				console.log("response message was ", response);
 				if (!response.data.message) {
 					updateOnLogin(onUpdate, response.data[0]);
-					history.push("/");
+					//history.push("/");
 				} else {
 					setLoginStatus(response.data.message);
 				}
@@ -49,8 +49,10 @@ const Login = (props) => {
 		<div className="Container">
 			<div className="content">
 				<div className="header">
-					<h1>Welcome to GCU Health</h1>
-					<p>The health App that helps you keep track</p>
+					<h1>Welcome to TrendTracker</h1>
+					<p>
+						See The Influence Social Media Has on The Stock and Crypto Markets
+					</p>
 				</div>
 				<div className="login">
 					<div className="loginContainer">

@@ -2,13 +2,13 @@ import { React, useState } from "react";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import axios from "axios";
 import { Button } from "antd";
-import { useHistory } from "react-router-dom";
+import {} from "react-router-dom";
 import { CaretLeftOutlined, ExclamationCircleFilled } from "@ant-design/icons";
 import updateOnLogin from "../helpers/updateOnLogin";
 import endpoint from "../helpers/endPoint";
 
 const Register = (props) => {
-	const history = useHistory();
+	//const history = useHistory();
 
 	const { state, onUpdate, setRegisterClicked } = props;
 	const [firstNameReg, setFirstNameReg] = useState(null);
@@ -48,7 +48,7 @@ const Register = (props) => {
 						})
 						.then((response) => {
 							updateOnLogin(onUpdate, response.data[0]);
-							history.push("/");
+							//history.push("/");
 						});
 				}
 			});

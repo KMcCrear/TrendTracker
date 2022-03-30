@@ -1,5 +1,7 @@
 const auth = require("basic-auth");
 const bcrypt = require("bcrypt");
+const express = require("express");
+const router = express.Router();
 
 /**
  *
