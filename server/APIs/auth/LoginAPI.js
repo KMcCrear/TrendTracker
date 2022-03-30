@@ -1,6 +1,8 @@
 const express = require('express');
 const auth = require("basic-auth");
 const bcrypt = require("bcrypt");
+const express = require("express");
+const router = express.Router();
 
 module.exports = function(database) {
 	const router = express.Router();
@@ -37,12 +39,14 @@ module.exports = function(database) {
 						req.session.user = {
 							userID: user.userID,
 							forename: user.forename,
-							surname: user.surname
-						}
-						res.status(200).send({forename: user.forename, surname: user.surname}).end('Successfully logged in');
-					}
-					else {
-						res.status(401).end('Invalid username or password');
+							surname: user.surname,
+						};
+						res
+							.status(200)
+							.send({ forename: user.forename, surname: user.surname })
+							.end("Successfully logged in");
+					} else {
+						res.status(401).end("Invalid username or password");
 					}
 				});
 			});

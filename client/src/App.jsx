@@ -6,7 +6,11 @@ import Stocks from "./pages/Stocks";
 import Crypto from "./pages/Crypto";
 import Coins from "./pages/Coins";
 import Portfolio from "./pages/Portfolio";
-import { useState, useEffect } from "react";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { useState } from "react";
+import { useEffect } from "react";
+import updateOnLogin from "./helpers/updateOnLogin";
 import endPoint from "./helpers/endPoint";
 import axios from "axios";
 
@@ -46,6 +50,8 @@ const App = () => {
 				<Route path="/crypto" element={<Crypto search={input} />} state={state}/>
 				<Route path="/coins/:coin" element={<Coins search={input} state={state}/>} />
 				<Route path="/portfolio" element={<Portfolio state={state} />} />
+				<Route path="/login" element={<Login state={state} />} />
+				<Route path="/register" element={<Register state={state} />} />
 			</Routes>
 		</div>
 	);
