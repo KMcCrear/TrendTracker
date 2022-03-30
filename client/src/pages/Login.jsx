@@ -3,8 +3,8 @@ import {} from "react-router-dom";
 import axios from "axios";
 import Register from "./Register";
 import { Typography } from "antd";
-import updateOnLogin from "../helpers/updateOnLogin";
 import endPoint from "../helpers/endPoint";
+import login from "../helpers/login"
 
 const { Title } = Typography;
 
@@ -28,7 +28,7 @@ const Login = (props) => {
 			.then((response) => {
 				console.log("response message was ", response);
 				if (!response.data.message) {
-					updateOnLogin(onUpdate, response.data[0]);
+					//updateOnLogin(onUpdate, response.data[0]);
 					//history.push("/");
 				} else {
 					setLoginStatus(response.data.message);

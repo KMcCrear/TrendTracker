@@ -4,7 +4,6 @@ import axios from "axios";
 import { Button } from "antd";
 import {} from "react-router-dom";
 import { CaretLeftOutlined, ExclamationCircleFilled } from "@ant-design/icons";
-import updateOnLogin from "../helpers/updateOnLogin";
 import endpoint from "../helpers/endPoint";
 
 const Register = (props) => {
@@ -47,7 +46,7 @@ const Register = (props) => {
 							password: passwordTwoReg,
 						})
 						.then((response) => {
-							updateOnLogin(onUpdate, response.data[0]);
+							//updateOnLogin(onUpdate, response.data[0]);
 							//history.push("/");
 						});
 				}
