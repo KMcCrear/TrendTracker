@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import getFinanceData from "../helpers/getFinanceData";
 import CandleStick from "../components/CandleStick";
 import addToWatchList from "../helpers/addToWatchlist";
+import getSingleTicker from "../helpers/getSingleTicker";
 
 export default function Stocks() {
 	const history = useLocation();
@@ -11,56 +12,37 @@ export default function Stocks() {
 	const [stockData, setStockData] = useState("");
 
 	useEffect(() => {
-		let count = 0;
-		const top12 = [
-			"AAPL",
-			"MSFT",
-			"AMZN",
-			"TSLA",
-			"NVDA",
-			"GOOG",
-			"GOOGL",
-			"FB",
-			"AVGO",
-			"COST",
-			"PEP",
-			"CSCO",
-		];
+		const top5 = ["AAPL", "MSFT", "AMZN", "TSLA", "NVDA"];
 		if (query) {
 			getFinanceData(query).then((data) => {
 				console.log(data);
 			});
 		} else {
-			top12.forEach((entry) => {
-				getFinanceData(entry).then((test) => {
-					console.log(test);
-					let displayTable = test.map((data) => (
-						<table className="stockTable" key={data.name}>
-							<tbody className="stocksData">
-								<tr className="stocksData">
-									<td>{(count += 1)}</td>
-									<td className="dataName">
-										<a href={`/stocks/${data.name}`}>{data.name}</a>
-									</td>
-									<td className="dataPrice">{data.quote.USD.price}</td>
-									<td>
-										{Math.round(data.quote.USD.percent_change_1h * 100) / 100}
-									</td>
-									<td>
-										{Math.round(data.quote.USD.percent_change_24h * 100) / 100}
-									</td>
-									<td>
-										{Math.round(data.quote.USD.percent_change_7d * 100) / 100}
-									</td>
-									<td className="dataVolume">${data.quote.USD.volume_24h}</td>
-									<td className="dataMktCap">{data.quote.USD.market_cap}</td>
-								</tr>
-							</tbody>
-						</table>
-					));
-					setStockData(displayTable);
+			let anArray = [];
+			top5.forEach((entry) => {
+				getSingleTicker(entry).then((response) => {
+					anArray.push(response);
+					mapData(anArray);
 				});
 			});
+			console.log(anArray);
+			const mapData = (stockArray) => {
+				let count = 0;
+				let renderData = stockArray.map((response) => (
+					<table className="stockTable" key={response.symbol}>
+						<tbody className="loadedStocksData">
+							<tr className="stocksData">
+								<td>{(count += 1)}</td>
+								<td className="dataName">
+									<a href={`/stocks/${response.symbol}`}>{response.symbol}</a>
+								</td>
+								<td className="dataPrice">{response.close}</td>
+							</tr>
+						</tbody>
+					</table>
+				));
+				setStockData(renderData);
+			};
 		}
 	}, [query]);
 
@@ -75,7 +57,7 @@ export default function Stocks() {
 	if (query) {
 		return (
 			<div className="stocksContainer">
-				<h1>Stocks</h1>
+				<h1>Trending Stocks</h1>
 				<CandleStick search={query} />
 				<button onClick={(e) => addStockToWatchList(e)}>
 					Add Ticker to Watch List
@@ -92,11 +74,6 @@ export default function Stocks() {
 							<th>#</th>
 							<th>Stock</th>
 							<th>Price</th>
-							<th>1h</th>
-							<th>24h</th>
-							<th>7d</th>
-							<th>24h Volume</th>
-							<th>Mkt Cap</th>
 						</tr>
 					</thead>
 				</table>

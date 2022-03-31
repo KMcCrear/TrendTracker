@@ -15,7 +15,7 @@ router.get("/search/ticker/:search", (req, res) => {
 
 	let rangePast = 0; //days to look into past
 	let rangeResolutionMulti = 1;
-	let rangeResolution = 'hour';
+	let rangeResolution = "hour";
 
 	//query processing
 	//if object is empty
@@ -26,44 +26,49 @@ router.get("/search/ticker/:search", (req, res) => {
 			let valid = true;
 			let dayRange;
 			switch (range) {
-				case 'week':
+				case "week":
 					dayRange = 7;
 					break;
-				case 'month':
+				case "month":
 					dayRange = 30;
 					break;
-				case 'quarter':
+				case "quarter":
 					dayRange = 90;
 					break;
-				case 'year':
+				case "year":
 					dayRange = 360;
 					break;
-				case '2year':
+				case "2year":
 					dayRange = 720;
-					break
+					break;
 				default:
 					valid = false;
 					break;
 			}
 			if (valid) {
 				rangePast = dayRange;
-				rangeResolutionMulti = Math.ceil(dayRange/MAXDATAPOINTS);
-				rangeResolution = 'day';
+				rangeResolutionMulti = Math.ceil(dayRange / MAXDATAPOINTS);
+				rangeResolution = "day";
 			}
 		}
 	}
-	
+
 	const date = new Date();
 	date.setDate(date.getDate() - 1);
 	//from start of day from to end of yesterday, therefor if range = day dates are the same
 	//as we can only query data once the day is done, la is chosen as end of day to polygon is end of a day in usa
-	const dateYesterdayLocale = date.toLocaleString('sv',{timeZone: 'America/Los_Angeles',dateStyle: 'short'});
+	const dateYesterdayLocale = date.toLocaleString("sv", {
+		timeZone: "America/Los_Angeles",
+		dateStyle: "short",
+	});
 	let dateFromLocale;
 	if (rangePast > 0) {
-		date.setDate(date.getDate() - rangePast)
-		dateFromLocale = date.toLocaleString('sv',{timeZone: 'America/Los_Angeles',dateStyle: 'short'});
-	}
-	else {
+		date.setDate(date.getDate() - rangePast);
+		dateFromLocale = date.toLocaleString("sv", {
+			timeZone: "America/Los_Angeles",
+			dateStyle: "short",
+		});
+	} else {
 		dateFromLocale = dateYesterdayLocale;
 	}
 
@@ -74,8 +79,7 @@ router.get("/search/ticker/:search", (req, res) => {
 		.then((response) => {
 			if (response.data.results == undefined) {
 				res.send([]);
-			}
-			else {
+			} else {
 				res.send(response.data.results);
 			}
 		})
@@ -120,6 +124,34 @@ router.get("/search/company/:search", (req, res) => {
 		})
 		.catch((err) => {
 			console.log(new Date().toString().substring(0, 24) + ": " + err.message);
+			res.send(err);
+		});
+});
+
+/**
+ * @name SearchSingleTicker
+ * Searches and returns up to 10 news items related to provided ticker
+ */
+
+router.get("/search/singleticker/:search", (req, res) => {
+	const date = new Date();
+	date.setDate(date.getDate() - 1);
+	//from start of day from to end of yesterday, therefor if range = day dates are the same
+	//as we can only query data once the day is done, la is chosen as end of day to polygon is end of a day in usa
+	const dateYesterdayLocale = date.toLocaleString("sv", {
+		timeZone: "America/Los_Angeles",
+		dateStyle: "short",
+	});
+	const query = req.params.search;
+	axios({
+		method: "get",
+		url: `https://api.polygon.io/v1/open-close/${query}/${dateYesterdayLocale}?adjusted=true&apiKey=${POLYGON_API_TOKEN}`,
+	})
+		.then((response) => {
+			res.send(response.data);
+		})
+		.catch((err) => {
+			console.log(new Date().toString().substring(0, 24) + ": " + err);
 			res.send(err);
 		});
 });
