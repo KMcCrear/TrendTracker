@@ -77,7 +77,7 @@ button:hover {
 	display: flex;
 }
 
-/* Crypto.jsc */
+/* Crypto.jsx */
 .cryptoContainer {
 }
 
@@ -160,6 +160,86 @@ button:hover {
 	justify-content: right;
 }
 
+
+/* StockPage CSS */
+.stocksContainer .title {
+	align-items: left;
+}
+
+.stocksContainer .headerTable {
+	table-layout: auto;
+	text-align: left;
+	width: 930px;
+	margin-left: 50px;
+}
+
+.stocksContainer .headerTable .columns {
+	border-collapse: collapse;
+	text-align: left;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.stocksContainer .headerTable .columns .columnData {
+	box-sizing: border-box;
+	height: 60px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 20px;
+	border-bottom: solid;
+	border-width: 2px;
+}
+
+.stocksContainer .headerTable .columns .columnData th {
+	width: 187px;
+}
+
+.stocksContainer .stockTable {
+	table-layout: auto;
+	text-align: left;
+	width: 930px;
+	margin-left: 50px;
+}
+
+.stocksContainer .loadedStocksData {
+	border-collapse: collapse;
+	text-align: left;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.stocksContainer .loadedStocksData .stocksData {
+	box-sizing: border-box;
+	height: 60px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 5px;
+	border-bottom: solid;
+	border-width: 0.7px;
+}
+
+.stocksContainer .loadedStocksData .stocksData td {
+	width: 187px;
+}
+
+.stocksContainer .loadedStocksData .stocksData .leftSide {
+	flex: 50%;
+	display: flex;
+	justify-content: left;
+}
+
+.stocksContainer .loadedStockData .stocksData .rightSide {
+	flex: 50%;
+	display: flex;
+	justify-content: right;
+
 div#chartButtons {
     display: flex;
     justify-content: space-between;
@@ -167,6 +247,7 @@ div#chartButtons {
 
 div#chart {
     width: fit-content;
+
 }
 
 .content {

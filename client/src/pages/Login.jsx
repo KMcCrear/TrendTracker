@@ -3,7 +3,8 @@ import {} from "react-router-dom";
 import axios from "axios";
 import Register from "./Register";
 import { Typography } from "antd";
-import endPoint from "../helpers/endPoint";
+import updateOnLogin from "../helpers/updateOnLogin";
+import endpoint from "../helpers/endPoint";
 import login from "../helpers/login"
 
 const { Title } = Typography;
@@ -17,18 +18,19 @@ const Login = (props) => {
 	const [registerClicked, setRegisterClicked] = useState(false);
 
 	const login = () => {
-		if (!state.email || !password) {
+
+		if (!state.loggedIn) {
 			setLoginStatus("Please enter your email and password!");
 			return;
 		}
 		axios
-			.post(`${endPoint()}/auth/login`, {
+			.post(`${endpoint()}/auth/login`, {
 				withCredentials: true,
 			})
 			.then((response) => {
 				console.log("response message was ", response);
 				if (!response.data.message) {
-					//updateOnLogin(onUpdate, response.data[0]);
+					updateOnLogin(onUpdate, response.data[0]);
 					//history.push("/");
 				} else {
 					setLoginStatus(response.data.message);
@@ -58,9 +60,9 @@ const Login = (props) => {
 					<div className="loginContainer">
 						<label class="label">Email</label>
 						<input
-							type="email"
+							type="username"
 							onChange={(e) => {
-								onUpdate({ email: e.target.value });
+								onUpdate({ username: e.target.value });
 							}}
 						/>
 						<label class="label">Password</label>

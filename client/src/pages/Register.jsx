@@ -4,6 +4,7 @@ import axios from "axios";
 import { Button } from "antd";
 import {} from "react-router-dom";
 import { CaretLeftOutlined, ExclamationCircleFilled } from "@ant-design/icons";
+import updateOnLogin from "../helpers/updateOnLogin";
 import endpoint from "../helpers/endPoint";
 
 const Register = (props) => {
