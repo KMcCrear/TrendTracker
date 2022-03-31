@@ -47,7 +47,7 @@ const Register = (props) => {
 							password: passwordTwoReg,
 						})
 						.then((response) => {
-							updateOnLogin(onUpdate, response.data[0]);
+							//updateOnLogin(onUpdate, response.data[0]);
 							//history.push("/");
 						});
 				}

@@ -160,6 +160,7 @@ button:hover {
 	justify-content: right;
 }
 
+
 /* StockPage CSS */
 .stocksContainer .title {
 	align-items: left;
@@ -238,6 +239,15 @@ button:hover {
 	flex: 50%;
 	display: flex;
 	justify-content: right;
+
+div#chartButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+div#chart {
+    width: fit-content;
+
 }
 
 .content {

@@ -15,18 +15,31 @@ router.get("/getUserWatchList", (req, res) => {
 	);
 });
 
-router.post("/add/:type/:id", (req, res) => {
+router.get('/has/:identifier',(req,res) => {
+	const identifier = req.params.identifier;
+	req.db.query('CALL getUserwatchlistItem(?,?)', [req.session.user.userID, identifier],(err,results,fields) => {
+		if (err) {res.status(500).end(); return};
+		if (results[0].length == 0) {
+			res.status(200).end('false');
+		}
+		else {
+			res.status(200).end('true');
+		}
+	})
+})
+
+router.post("/add/:type/:identifier", (req, res) => {
 	const type = req.params.type;
-	const identifier = req.params.id;
+	const identifier = req.params.identifier;
 	req.db.query('CALL addToWatchlist(?,?,?)', [req.session.user.userID, type, identifier],(err,results,fields) => {
 		if (err) {res.status(500).end(); return};
 		res.status(201).end();
 	})
 })
 
-router.delete('/delete/:listID', (req,res) => {
-	const listID = req.params.listID;
-	req.db.query('CALL deleteFromWatchlist(?,?)', [req.session.user.userID, listID],(err,results,fields) => {
+router.delete('/delete/:identifier', (req,res) => {
+	const identifier = req.params.identifier;
+	req.db.query('CALL deleteFromWatchlist(?,?)', [req.session.user.userID, identifier],(err,results,fields) => {
 		if (err) {res.status(500).end(); return};
 		res.end();
 	})

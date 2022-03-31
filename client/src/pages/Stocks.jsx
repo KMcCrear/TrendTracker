@@ -1,11 +1,12 @@
+
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import getFinanceData from "../helpers/getFinanceData";
 import CandleStick from "../components/CandleStick";
 import addToWatchList from "../helpers/addToWatchlist";
 import getSingleTicker from "../helpers/getSingleTicker";
 
-export default function Stocks() {
+export default function Stocks(props) {
 	const history = useLocation();
 	const params = history.pathname;
 	const query = params.slice(8);
@@ -54,14 +55,14 @@ export default function Stocks() {
 		});
 	};
 
-	if (query) {
+	const {state} = props;
+	const {ticker} = useParams();
+
+	if (ticker) {
 		return (
 			<div className="stocksContainer">
-				<h1>Trending Stocks</h1>
-				<CandleStick search={query} />
-				<button onClick={(e) => addStockToWatchList(e)}>
-					Add Ticker to Watch List
-				</button>
+				<h1>Stocks</h1>
+				<CandleStick search={ticker} state={state} what="stock"/>
 			</div>
 		);
 	} else {

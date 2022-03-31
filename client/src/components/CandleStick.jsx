@@ -1,13 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "react-apexcharts";
 import makeChartData from "../helpers/makeChartData";
-import cookies from "js-cookie"
 import {Alert} from 'antd'
 import addToWatchlist from "../helpers/addToWatchlist";
-import axios from "axios";
+import hasWatchlistItem from "../helpers/hasWatchlistItem";
+import deleteFromWatchlist from "../helpers/deleteFromWatchlist";
 
 const CandleStick = (props)=>{
-	const {search} =props;
+	const propSearch = props.search?.toUpperCase();
+	const { state } = props;
+	const { what } = props;
+
+	const [search,setSearch] = useState(propSearch);
+	const [portfolioButton,setPortfolioButton] = useState();
 	const [data,setData] = useState([])
 	const options = useRef({
 		chart: {
@@ -28,23 +33,40 @@ const CandleStick = (props)=>{
 		},
 	},)
 
+
 	const updateData = async()=>{
-		const newData = await makeChartData(search.toUpperCase());
-		setData(newData);
+		setData(await makeChartData(search))
+		if (state.loggedIn) {
+			const has = await hasWatchlistItem(search);
+			const onAdd = () => {
+				addToWatchlist(search,what)
+				.then(() => setPortfolioButton(remove))
+				.catch((err) => alert('unable'));
+			}
+			const onRemove = () => {
+				deleteFromWatchlist(search)
+				.then(() => setPortfolioButton(add))
+				.catch((err) => alert('unable'));
+			};
+			const add = <button onClick={onAdd}>Add to portfolio</button>;
+			const remove = <button onClick={onRemove}>Remove from portfolio</button>;
+			if (has) {
+				setPortfolioButton(remove);
+			}
+			else {
+				setPortfolioButton(add);
+			}
+		};
 	}
 
 	useEffect(()=>{
 		const fetchData = async()=>{
-			await updateData();
+			await updateData();	
 		}
 		fetchData();
 	},[search])
 
 	if(data.length>0){
-		let button;
-		if (cookies.get('user')) {
-			button = <button onClick={() => addToWatchlist(search,'stock')}>Add to watchlist</button>
-		}
 		return (
 			<div id="chart">
 				<Chart
@@ -54,8 +76,21 @@ const CandleStick = (props)=>{
 					type="candlestick"
 					height={350}
 				/>
-				<button onClick={updateData}>Refresh</button>
-				{button}
+				<div id="chartButtons">
+					<div>
+						<button onClick={updateData}>Refresh</button>
+						{portfolioButton}
+					</div>
+					<div>
+						<button onClick={() => setSearch(propSearch)}>1d</button>
+						<button onClick={() => setSearch(propSearch + '?range=week')}>7d</button>
+						<button onClick={() => setSearch(propSearch + '?range=month')}>30d</button>
+						<button onClick={() => setSearch(propSearch + '?range=quarter')}>90d</button>
+						<button onClick={() => setSearch(propSearch + '?range=year')}>1y</button>
+						<button onClick={() => setSearch(propSearch + '?range=2year')}>2y</button>
+					</div>
+				</div>
+				
 			</div>
 		);
 	}

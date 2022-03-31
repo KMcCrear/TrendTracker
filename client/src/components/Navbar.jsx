@@ -3,6 +3,7 @@ import login from "../helpers/login";
 // import ReorderIcon from "@material-ui/icons/Reorder";
 
 function NavBar(props) {
+	const { state } = props;
 	const [showLinks, setShowLinks] = useState(false);
 	let tempInput = "";
 
@@ -20,7 +21,7 @@ function NavBar(props) {
 						<a href="/stocks">Stocks</a>
 						<a href="/crypto">Crypto</a>
 						<a onClick={login.bind(null, "raysweekend", "car go fast")}>
-							Login
+							{state.loggedIn ? 'Logout':'Login'}
 						</a>
 						<a href="/portfolio">Portfolio</a>
 					</div>

@@ -8,13 +8,14 @@ import { Alert, Space } from "antd";
 
 const Dashboard = (props) => {
 	const { search } = props;
+	const { state } = props;
 
 	if (search) {
 		return (
 			<div className="dashboardContainer">
 				<h1>Dashboard</h1>
 				<Space direction="horizontal" style={{ width: "100%" }}>
-					<CandleStick search={search} />
+					<CandleStick search={search} state={state} what="stock"/>
 					<TweetInfo search={search} />
 				</Space>
 				<NewsInfo search={search} />

@@ -12,7 +12,7 @@ export default function Portfolio(props) {
 		let count = 1;
 		return (
 			array.map((data) => (
-				<tr className={`${data.what}Row`} key={data.listID}>
+				<tr className={`${data.what}Row`} key={data.identifier}>
 					<td>{count++}</td>
 					<td className="dataName">
 						<a href={`/${data.what}/${data.identifier}`}>{data.identifier}</a>
@@ -25,7 +25,7 @@ export default function Portfolio(props) {
 	}
 
 	const remove = (data) => {
-		const id = data.listID;
+		const id = data.identifier;
 		deleteFromWatchlist(id).then(() => {
 			if (data.what === "stock") {
 				actualStockData.current = actualStockData.current.filter(row => row.key != id)

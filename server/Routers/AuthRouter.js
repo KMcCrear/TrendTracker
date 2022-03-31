@@ -20,8 +20,7 @@ router.use(
 
 const loginapi = require("../APIs/auth/LoginAPI");
 
-router.post("/login", loginapi.login(db));
-router.post("/logout", loginapi.logout(db));
+router.use('/',loginapi(db))
 
 router.use((req, res, next) => {
 	if (req.session.user) {

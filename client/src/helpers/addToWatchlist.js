@@ -5,7 +5,7 @@ const addToWatchlist = (identifier,type) => {
 	return axios({
         method: 'POST',
         withCredentials: true,
-        url: `${endPoint}/auth/watchlist/add/${type}/${identifier}`
+        url: `${endPoint()}/auth/watchlist/add/${type}/${identifier}`
     }).then((response) => response.data);
 };
 

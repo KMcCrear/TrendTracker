@@ -5,6 +5,7 @@ import Register from "./Register";
 import { Typography } from "antd";
 import updateOnLogin from "../helpers/updateOnLogin";
 import endpoint from "../helpers/endPoint";
+import login from "../helpers/login"
 
 const { Title } = Typography;
 
@@ -17,6 +18,7 @@ const Login = (props) => {
 	const [registerClicked, setRegisterClicked] = useState(false);
 
 	const login = () => {
+
 		if (!state.loggedIn) {
 			setLoginStatus("Please enter your email and password!");
 			return;
