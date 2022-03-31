@@ -3,7 +3,7 @@ import endPoint from "../helpers/endPoint";
 
 const getFinanceData = (userQuery) => {
 	return axios
-		.get(`${endPoint()}/polygon/search/ticker/${userQuery}?range=week`)
+		.get(`${endPoint()}/polygon/search/ticker/${userQuery}`)
 		.then((response) => response.data);
 };
 

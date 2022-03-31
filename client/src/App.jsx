@@ -10,44 +10,33 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
 import { useEffect } from "react";
-import updateOnLogin from "./helpers/updateOnLogin";
 import endPoint from "./helpers/endPoint";
 import axios from "axios";
+import jscookie from "js-cookie"
 
 const App = () => {
 	const [input, setInput] = useState();
-	const [state, setNewState] = useState({
-		loggedIn: false,
-		firstname: null,
-		surname: null,
-		message: null,
-	});
-	axios.defaults.withCredentials = true;
 
-	useEffect(() => {
-		if (state.loggedIn) {
-			return;
-		}
-		axios.get(`${endPoint()}/auth/login`).then((response) => {
-			console.log("response was ", response.data);
-			if (response.data.loggedIn === true) {
-				updateOnLogin(onUpdate, response.data.user[0]);
-			}
-		});
-	}, [state.loggedIn]);
-
-	const onUpdate = (object) => {};
+	//getting state from cookies
+	let s = jscookie.get('state');
+	if (s) {
+		s = JSON.parse(s)
+	}
+	else {
+		s = {loggedIn: false}
+	}
+	const state = s;
 
 	return (
 		<div className="App">
-			<NavBar input={input} setInput={setInput} />
+			<NavBar input={input} setInput={setInput} state={state}/>
 
 			<Routes>
-				<Route exact path="/" element={<Dashboard search={input} />} />
-				<Route path="/stocks" element={<Stocks search={input} />} />
-				<Route path="/stocks/:ticker" element={<Stocks search={input} />} />
-				<Route path="/crypto" element={<Crypto search={input} />} />
-				<Route path="/coins/:coin" element={<Coins search={input} />} />
+				<Route exact path="/" element={<Dashboard search={input} state={state}/>} />
+				<Route path="/stock" element={<Stocks search={input} state={state}/>} />
+				<Route path="/stock/:ticker" element={<Stocks search={input} state={state} />} />
+				<Route path="/crypto" element={<Crypto search={input} />} state={state}/>
+				<Route path="/coins/:coin" element={<Coins search={input} state={state}/>} />
 				<Route path="/portfolio" element={<Portfolio state={state} />} />
 				<Route path="/login" element={<Login state={state} />} />
 				<Route path="/register" element={<Register state={state} />} />
