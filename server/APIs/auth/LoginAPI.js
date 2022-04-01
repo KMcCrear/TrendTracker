@@ -26,7 +26,7 @@ module.exports = function(database) {
 					return;
 				}
 				if (results[0].length == 0) {
-					res.status(401).end("Invalid uername or password");
+					res.status(401).end("Invalid username or password");
 					return;
 				}
 
@@ -64,10 +64,52 @@ module.exports = function(database) {
 		}
 	})
 
-	router.post('/register', (req,res) => {
-		res.end();
+	router.post('/logout',(req,res) => {
+		if (req.session.user) {
+			req.session.destroy((err) => {
+				if (err) {
+					res.status(500).end();
+				}
+				else {
+					res.status(200).end("Successfully logged out");
+				}
+			});
+		}
+		else {
+			res.status(400).end("Not logged in");
+		}
 	})
 
+	router.post('/register/:forename/:surname', (req,res) => {
+		const credentials = auth(req);
+
+		if (!credentials) {
+			res.status(401)
+			.set(
+				"WWW-Authenticate",
+				'Basic realm="Access to user section", charset="UTF-8"'
+			).end("Invalid or no credentials provided");
+			return;
+		}
+		
+		const {forename} = req.params;
+		const {surname} = req.params;
+
+		bcrypt.hash(credentials.pass,10,(error,hash) => {
+			if (error) {
+				res.status(500).end();
+				return;
+			}
+			db.query("CALL addUser(?,?,?,?)",[forename,surname,credentials.name,hash],(err,results,fields) => {
+				if (err) {
+					res.status(500).end();
+					return;
+				}
+				res.status(201).end("Successfully registered")
+			})
+		});
+
+	})
 
 	return router;
 }
