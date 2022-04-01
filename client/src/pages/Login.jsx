@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Register from "./Register";
 import { Typography } from "antd";
-import endpoint from "../helpers/endPoint";
 import loginHelper from "../helpers/login"
 
 const { Title } = Typography;
@@ -24,8 +22,15 @@ const Login = (props) => {
 		else {
 			loginHelper(username,password)
 			.then((response) => {
-				console.log("response message was ", response);
 				navigate('/')
+			}).catch((err) => {
+				if (err.response.status == 401) {
+					setLoginStatus('Incorrect username or password!');
+				}
+				else {
+					console.log(err)
+					alert("Unable");
+				}
 			});
 		}
 	};
