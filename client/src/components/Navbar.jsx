@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import login from "../helpers/login";
 // import ReorderIcon from "@material-ui/icons/Reorder";
 
@@ -20,9 +20,7 @@ function NavBar(props) {
 						<a href="/">Dashboard</a>
 						<a href="/stocks">Stocks</a>
 						<a href="/crypto">Crypto</a>
-						<a onClick={login.bind(null, "raysweekend", "car go fast")}>
-							{state.loggedIn ? 'Logout':'Login'}
-						</a>
+						<a href="/login">{state.loggedIn ? "Logout":"Login"}</a>
 						<a href="/portfolio">Portfolio</a>
 					</div>
 					<button onClick={() => setShowLinks(!showLinks)}>

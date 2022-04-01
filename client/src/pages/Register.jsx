@@ -2,14 +2,14 @@ import { React, useState } from "react";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import axios from "axios";
 import { Button } from "antd";
-import {} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CaretLeftOutlined, ExclamationCircleFilled } from "@ant-design/icons";
-import updateOnLogin from "../helpers/updateOnLogin";
 import endpoint from "../helpers/endPoint";
+import login from "../helpers/login";
 
 const Register = (props) => {
-	//const history = useHistory();
 
+	const navigate = useNavigate();
 	const { state, onUpdate, setRegisterClicked } = props;
 	const [firstNameReg, setFirstNameReg] = useState(null);
 	const [surNameReg, setSurNameReg] = useState(null);
@@ -41,15 +41,10 @@ const Register = (props) => {
 					setRegisterStatus(response.data.message);
 				} else {
 					console.log("data is ", data);
-					axios
-						.post(`${endpoint()}/login`, {
-							username: username,
-							password: passwordTwoReg,
-						})
-						.then((response) => {
-							//updateOnLogin(onUpdate, response.data[0]);
-							//history.push("/");
-						});
+					login(username,passwordTwoReg)
+					.then((response) => {
+						navigate("/");
+					});
 				}
 			});
 		}
