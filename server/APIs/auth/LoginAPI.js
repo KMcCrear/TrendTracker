@@ -64,6 +64,22 @@ module.exports = function(database) {
 		}
 	})
 
+	router.post('/logout',(req,res) => {
+		if (req.session.user) {
+			req.session.destroy((err) => {
+				if (err) {
+					res.status(500).end();
+				}
+				else {
+					res.status(200).end("Successfully logged out");
+				}
+			});
+		}
+		else {
+			res.status(400).end("Not logged in");
+		}
+	})
+
 	router.post('/register/:forename/:surname', (req,res) => {
 		const credentials = auth(req);
 
@@ -94,7 +110,6 @@ module.exports = function(database) {
 		});
 
 	})
-
 
 	return router;
 }
