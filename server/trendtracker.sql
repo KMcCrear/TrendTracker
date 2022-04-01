@@ -54,6 +54,12 @@ BEGIN
     WHERE username = inUsername;
 END$$
 
+CREATE PROCEDURE addUser(IN inForename VARCHAR(32), IN inSurname VARCHAR(32), IN inUsername VARCHAR(32), IN inPassword VARCHAR(60))
+BEGIN
+    INSERT INTO users (forename,surname,username,password)
+    VALUES (inForename,inSurname,inUsername, inPassword);
+END$$
+
 CREATE PROCEDURE getUserwatchlist(IN inUserID INT) 
 BEGIN
     SELECT watchlist.listID,watchlist.what,watchlist.identifier FROM users
