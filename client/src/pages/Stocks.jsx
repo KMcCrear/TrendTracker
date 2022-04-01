@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import getFinanceData from "../helpers/getFinanceData";
@@ -36,7 +35,7 @@ export default function Stocks(props) {
 							<tr className="stocksData">
 								<td>{(count += 1)}</td>
 								<td className="dataName">
-									<a href={`/stocks/${response.symbol}`}>{response.symbol}</a>
+									<a href={`/stock/${response.symbol}`}>{response.symbol}</a>
 								</td>
 								<td className="dataPrice">{response.close}</td>
 							</tr>
@@ -52,7 +51,7 @@ export default function Stocks(props) {
 		return (
 			<div className="stocksContainer">
 				<h1>Stocks</h1>
-				<CandleStick search={ticker} state={state} what="stock"/>
+				<CandleStick search={ticker} state={state} what="stock" />
 			</div>
 		);
 	} else {

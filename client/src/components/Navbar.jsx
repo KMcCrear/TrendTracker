@@ -18,9 +18,9 @@ function NavBar(props) {
 				<div className="leftSide">
 					<div className="links" id={showLinks ? "hidden" : ""}>
 						<a href="/">Dashboard</a>
-						<a href="/stocks">Stocks</a>
+						<a href="/stock">Stocks</a>
 						<a href="/crypto">Crypto</a>
-						<a href="/login">{state.loggedIn ? "Logout":"Login"}</a>
+						<a href="/login">{state.loggedIn ? "Logout" : "Login"}</a>
 						<a href="/portfolio">Portfolio</a>
 					</div>
 					<button onClick={() => setShowLinks(!showLinks)}>
