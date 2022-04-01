@@ -1,11 +1,10 @@
 import { React, useState } from "react";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import axios from "axios";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { CaretLeftOutlined, ExclamationCircleFilled } from "@ant-design/icons";
-import endpoint from "../helpers/endPoint";
 import login from "../helpers/login";
+import register from "../helpers/register";
 
 const Register = (props) => {
 
@@ -30,22 +29,13 @@ const Register = (props) => {
 		} else if (passwordReg !== passwordTwoReg) {
 			setRegisterStatus("Passwords don't match!");
 		} else {
-			const data = {
-				firstname: firstNameReg,
-				surname: surNameReg,
-				username: username,
-				password: passwordTwoReg,
-			};
-			axios.post(`${endpoint()}/auth/register`, data).then((response) => {
-				if (response.data.message) {
-					setRegisterStatus(response.data.message);
-				} else {
-					console.log("data is ", data);
-					login(username,passwordTwoReg)
-					.then((response) => {
-						navigate("/");
-					});
-				}
+			register(firstNameReg,surNameReg,username,passwordTwoReg).then((res) => {
+				login(username,passwordTwoReg).then((res) => {
+					navigate("/");
+				});
+			}).catch((err) => {
+				console.log(err)
+				alert("Unable");
 			});
 		}
 	};
