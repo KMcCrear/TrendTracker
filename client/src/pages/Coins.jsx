@@ -3,6 +3,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import getCoinData from "../helpers/getCoinData";
 import TimeSeries from "../components/TimeSeries";
 import TweetInfo from "../components/TweetInfo";
+import addToWatchList from "../helpers/addToWatchlist";
 import { Space } from "antd";
 
 const Coins = () => {
@@ -35,12 +36,24 @@ const Coins = () => {
 		getData();
 	}, [query]);
 
+	const addCoinToWatchList = (e) => {
+		e.preventDefault();
+		const watchListID = query.slice(7).toLowerCase().trim();
+		addToWatchList("crypto", watchListID).then((response) => {
+			console.log(response);
+		});
+	};
+
 	return (
 		<div>
 			<h1>Coins Bro</h1>
 			<div>{seriesData}</div>
+			<button onClick={(e) => addCoinToWatchList(e)}>
+				Add to your Watchlist
+			</button>
 		</div>
 	);
 };
 
 export default Coins;
+

@@ -5,23 +5,44 @@ import { Dashboard } from "./pages/Dashboard";
 import Stocks from "./pages/Stocks";
 import Crypto from "./pages/Crypto";
 import Coins from "./pages/Coins";
+import Portfolio from "./pages/Portfolio";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import { useState } from "react";
+import { useEffect } from "react";
+import endPoint from "./helpers/endPoint";
+import axios from "axios";
+import jscookie from "js-cookie"
 
-function App() {
+const App = () => {
 	const [input, setInput] = useState();
+
+	//getting state from cookies
+	let s = jscookie.get('state');
+	if (s) {
+		s = JSON.parse(s)
+	}
+	else {
+		s = {loggedIn: false}
+	}
+	const state = s;
 
 	return (
 		<div className="App">
-			<NavBar input={input} setInput={setInput} />
+			<NavBar input={input} setInput={setInput} state={state}/>
 
 			<Routes>
-				<Route exact path="/" element={<Dashboard search={input} />} />
-				<Route path="/Stocks" element={<Stocks search={input} />} />
-				<Route path="/crypto" element={<Crypto search={input} />} />
-				<Route path="/coins/:coin" element={<Coins search={input} />} />
+				<Route exact path="/" element={<Dashboard search={input} state={state}/>} />
+				<Route path="/stock" element={<Stocks search={input} state={state}/>} />
+				<Route path="/stock/:ticker" element={<Stocks search={input} state={state} />} />
+				<Route path="/crypto" element={<Crypto search={input} />} state={state}/>
+				<Route path="/coins/:coin" element={<Coins search={input} state={state}/>} />
+				<Route path="/portfolio" element={<Portfolio state={state} />} />
+				<Route path="/login" element={<Login state={state} />} />
+				<Route path="/register" element={<Register state={state} />} />
 			</Routes>
 		</div>
 	);
-}
+};
 
 export default App;

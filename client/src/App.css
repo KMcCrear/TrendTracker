@@ -13,7 +13,7 @@ button:hover {
 }
 
 .Navbar {
-	background-color: #021e39;
+	background-color: #4ea699;
 	width: 100%;
 	height: 80px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -34,14 +34,14 @@ button:hover {
 }
 
 .Navbar .leftSide .links {
-	max-height: 80px;
+	max-height: 0px;
 }
 
 .Navbar .leftSide .links a {
 	text-decoration: none;
-	color: white;
-	font-size: 25px;
-	margin-left: 15px;
+	color: black;
+	font-size: 15px;
+	margin-left: 20px;
 }
 
 .Navbar .leftSide button {
@@ -63,13 +63,13 @@ button:hover {
 }
 
 .Navbar .rightSide .links {
-	max-height: 80px;
+	max-height: 90px;
 }
 
 .Navbar .rightSide .links a {
 	text-decoration: none;
-	color: white;
-	font-size: 25px;
+	color: black;
+	font-size: 23px;
 	margin-right: 15px;
 }
 
@@ -77,7 +77,7 @@ button:hover {
 	display: flex;
 }
 
-/* Crypto.jsc */
+/* Crypto.jsx */
 .cryptoContainer {
 }
 
@@ -107,7 +107,7 @@ button:hover {
 	height: 60px;
 	padding-left: 8px;
 	padding-right: 8px;
-	padding-top: 5px;
+	padding-top: 20px;
 	border-bottom: solid;
 	border-width: 2px;
 }
@@ -160,6 +160,194 @@ button:hover {
 	justify-content: right;
 }
 
+
+/* StockPage CSS */
+.stocksContainer .title {
+	align-items: left;
+}
+
+.stocksContainer .headerTable {
+	table-layout: auto;
+	text-align: left;
+	width: 930px;
+	margin-left: 50px;
+}
+
+.stocksContainer .headerTable .columns {
+	border-collapse: collapse;
+	text-align: left;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.stocksContainer .headerTable .columns .columnData {
+	box-sizing: border-box;
+	height: 60px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 20px;
+	border-bottom: solid;
+	border-width: 2px;
+}
+
+.stocksContainer .headerTable .columns .columnData th {
+	width: 187px;
+}
+
+.stocksContainer .stockTable {
+	table-layout: auto;
+	text-align: left;
+	width: 930px;
+	margin-left: 50px;
+}
+
+.stocksContainer .loadedStocksData {
+	border-collapse: collapse;
+	text-align: left;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.stocksContainer .loadedStocksData .stocksData {
+	box-sizing: border-box;
+	height: 60px;
+	padding-bottom: 5px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 5px;
+	border-bottom: solid;
+	border-width: 0.7px;
+}
+
+.stocksContainer .loadedStocksData .stocksData td {
+	width: 187px;
+}
+
+.stocksContainer .loadedStocksData .stocksData .leftSide {
+	flex: 50%;
+	display: flex;
+	justify-content: left;
+}
+
+.stocksContainer .loadedStockData .stocksData .rightSide {
+	flex: 50%;
+	display: flex;
+	justify-content: right;
+
+div#chartButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+div#chart {
+    width: fit-content;
+
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.content .header {
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #fec0ce;
+	font-size: 25px;
+	box-shadow: 0 50px 70px -20px rgba(238, 238, 238, 0.8);
+}
+
+.content .header h1 {
+	display: flex;
+	justify-content: center;
+}
+
+.content .header p {
+	display: flex;
+	justify-content: center;
+}
+
+.content .login .loginContainer {
+	padding: 60px;
+	margin: auto;
+	margin-top: 30px;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #643a64;
+	box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
+}
+
+.content .login .loginContainer label {
+	color: white;
+	margin: 14px 0;
+	display: block;
+	font-size: 22px;
+	line-height: 1;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.content .login .loginContainer input {
+	width: 100%;
+	border: none;
+	outline: none;
+	font-size: 19px;
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+
+.content .login .loginContainer .buttonContainer {
+	width: 100%;
+	padding: 24px 0;
+}
+
+.content .login .buttonContainer button {
+	border: none;
+	outline: none;
+	width: 100%;
+	padding: 15px 0;
+	color: rgb(0, 0, 0);
+	margin-left: 10px;
+	font-size: 16px;
+	letter-spacing: 1px;
+	background-color: #f1f1f2;
+}
+
+.content .login .buttonContainer p span a {
+	color: yellow;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	margin-left: 5px;
+	cursor: pointer;
+	transition: all 400ms ease-in-out;
+}
+
+.content .login .buttonContainer p span a:hover {
+	color: red;
+}
+
+.content .login .buttonContainer p span a:visited {
+	color: yellow;
+}
+
+.content .login .buttonContainer #loginStatus {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: rgb(207, 1, 1);
+}
+
 @media only screen and (max-width: 850px) {
 	.Navbar .leftSide .links a {
 		font-size: 20px;
@@ -185,16 +373,16 @@ button:hover {
 		position: absolute;
 		left: 0px;
 		top: 80px;
-		height: 230px;
-		max-height: 230px;
+		height: 180px;
+		max-height: 200px;
 		width: 100%;
-		background-color: #021e39;
+		background-color: #4ea699;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 	.Navbar .leftSide #hidden a {
 		margin: 10px;
-		font-size: 25px;
+		font-size: 15px;
 	}
 }
