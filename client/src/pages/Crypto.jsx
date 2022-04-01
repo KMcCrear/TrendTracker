@@ -1,17 +1,56 @@
 import React, { useEffect, useState } from "react";
 import getCryptoData from "../helpers/getCryptoData";
+import { useLocation, useParams } from "react-router-dom";
+import TimeSeries from "../components/TimeSeries";
+import TweetInfo from "../components/TweetInfo";
+import addToWatchList from "../helpers/addToWatchlist";
+import getCoinData from "../helpers/getCoinData";
+import { Space } from "antd";
 
 export default function Crypto() {
 	const [cryptoData, setCryptoData] = useState("");
+	const [seriesData, setSeriesData] = useState("");
+	const history = useLocation();
+	const query = history.pathname;
+	const queryString = query.slice(8);
+
+	const { ticker } = useParams();
 
 	useEffect(() => {
-		const getData = async () => {
-			let anArray = [];
+		const getTop12Coins = async () => {
 			const cryptoData = await getCryptoData();
 			renderData(cryptoData.slice(0, 12));
 		};
-		getData();
-	}, []);
+		const createTable = (data) => {
+			let coinAarry = data.prices;
+			let arrayToSend = [];
+
+			coinAarry.forEach((entry) => {
+				arrayToSend.push({
+					x: new Date(entry[0]),
+					y: [entry[1]],
+				});
+			});
+			//console.log(arrayToSend);
+
+			setSeriesData(
+				<Space direction="horizontal" style={{ width: "100%" }}>
+					<TimeSeries name={query.slice(8)} data={arrayToSend} />
+					<TweetInfo search={query.slice(8).toLocaleLowerCase()} />
+				</Space>
+			);
+		};
+
+		const getSingleCoinData = async () => {
+			const coinData = await getCoinData(query.slice(8).toLowerCase());
+			createTable(coinData);
+		};
+		if (queryString) {
+			getSingleCoinData();
+		} else {
+			getTop12Coins();
+		}
+	}, [query, queryString, ticker]);
 
 	const renderData = (cryptoArray) => {
 		let count = 0;
@@ -36,24 +75,44 @@ export default function Crypto() {
 		setCryptoData(renderedCrypto);
 	};
 
-	return (
-		<div className="cryptoContainer">
-			<h1 className="title">Crypto Prices by Market Cap</h1>
-			<table className="headerTable">
-				<thead className="columns">
-					<tr className="columnData">
-						<th>#</th>
-						<th>Coin</th>
-						<th>Price</th>
-						<th>1h</th>
-						<th>24h</th>
-						<th>7d</th>
-						<th>24h Volume</th>
-						<th>Mkt Cap</th>
-					</tr>
-				</thead>
-			</table>
-			{cryptoData}
-		</div>
-	);
+	const addCoinToWatchList = (e) => {
+		e.preventDefault();
+		const watchListID = query.slice(8).toLowerCase().trim();
+		addToWatchList("crypto", watchListID).then((response) => {
+			console.log(response);
+		});
+	};
+
+	if (queryString) {
+		return (
+			<div>
+				<h1>Coins Bro</h1>
+				<div>{seriesData}</div>
+				<button onClick={(e) => addCoinToWatchList(e)}>
+					Add to your Watchlist
+				</button>
+			</div>
+		);
+	} else {
+		return (
+			<div className="cryptoContainer">
+				<h1 className="title">Crypto Prices by Market Cap</h1>
+				<table className="headerTable">
+					<thead className="columns">
+						<tr className="columnData">
+							<th>#</th>
+							<th>Coin</th>
+							<th>Price</th>
+							<th>1h</th>
+							<th>24h</th>
+							<th>7d</th>
+							<th>24h Volume</th>
+							<th>Mkt Cap</th>
+						</tr>
+					</thead>
+				</table>
+				{cryptoData}
+			</div>
+		);
+	}
 }
