@@ -49,11 +49,11 @@ class TimeSeries extends React.Component {
 				yaxis: {
 					labels: {
 						formatter: function (val) {
-							return (val / 1000000).toFixed(0);
+							return Math.round(val * 1) / 1;
 						},
 					},
 					title: {
-						text: "Volume",
+						text: "Price",
 					},
 				},
 				xaxis: {
@@ -63,7 +63,7 @@ class TimeSeries extends React.Component {
 					shared: false,
 					y: {
 						formatter: function (val) {
-							return (val / 1000000).toFixed(0);
+							return Math.round(val * 100) / 100;
 						},
 					},
 				},

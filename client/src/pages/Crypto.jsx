@@ -22,12 +22,16 @@ export default function Crypto() {
 			renderData(cryptoData.slice(0, 12));
 		};
 		const createTable = (data) => {
-			let coinAarry = data.total_volumes;
+			let coinAarry = data.prices;
 			let arrayToSend = [];
 
 			coinAarry.forEach((entry) => {
-				arrayToSend.push({ x: new Date(entry[0]), y: [entry[1]] });
+				arrayToSend.push({
+					x: new Date(entry[0]),
+					y: [entry[1]],
+				});
 			});
+			//console.log(arrayToSend);
 
 			setSeriesData(
 				<Space direction="horizontal" style={{ width: "100%" }}>
@@ -46,7 +50,7 @@ export default function Crypto() {
 		} else {
 			getTop12Coins();
 		}
-	}, [query, ticker]);
+	}, [query, queryString, ticker]);
 
 	const renderData = (cryptoArray) => {
 		let count = 0;

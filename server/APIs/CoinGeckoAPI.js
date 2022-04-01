@@ -10,7 +10,7 @@ router.get("/coins/market_chart/:search", (req, res) => {
 	const query = req.params.search;
 	axios({
 		method: "get",
-		url: `https://api.coingecko.com/api/v3/coins/${query}/market_chart?vs_currency=usd&days=7&interval=daily`,
+		url: `https://api.coingecko.com/api/v3/coins/${query}/market_chart?vs_currency=usd&days=31&interval=daily`,
 	})
 		.then((response) => {
 			res.send(response.data);
