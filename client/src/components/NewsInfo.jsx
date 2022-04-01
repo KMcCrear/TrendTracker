@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getNewsData from "../helpers/getNewsData";
+import { Card } from "antd";
 
 const NewsInfo = (props) => {
 	const { search } = props;
@@ -11,23 +12,20 @@ const NewsInfo = (props) => {
 			const newsData = await getNewsData(search);
 
 			let rederedData = newsData.map((data) => (
-				<table className="articleTable" key={data.title}>
-					<tbody>
-						<tr>
-							<td>
-								Title: <a href={`${data.article_url}`}>{data.title}</a>
-							</td>
-							<td>Author: {data.author}</td>
-							<td>Published: {data.published_utc}</td>
-						</tr>
-					</tbody>
-				</table>
+				<div>
+					<h4>
+						Title: <a href={`${data.article_url}`}>{data.title}</a>
+					</h4>
+					<p>Author: {data.author}</p>
+					<p>Published: {data.published_utc.slice(0, 10)}</p>
+					<p>{data.description}</p>
+				</div>
 			));
 			setNewsArticles(rederedData);
 		};
 		displayNews(search);
 	}, [search]);
-	return <div>{newsArticles}</div>;
+	return <Card>{newsArticles}</Card>;
 };
 
 export default NewsInfo;
