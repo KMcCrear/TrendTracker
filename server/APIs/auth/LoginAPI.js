@@ -1,8 +1,6 @@
 const express = require('express');
 const auth = require("basic-auth");
 const bcrypt = require("bcrypt");
-const express = require("express");
-const router = express.Router();
 
 module.exports = function(database) {
 	const router = express.Router();
