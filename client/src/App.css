@@ -239,6 +239,7 @@ button:hover {
 	flex: 50%;
 	display: flex;
 	justify-content: right;
+}
 
 div#chartButtons {
     display: flex;

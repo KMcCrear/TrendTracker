@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import getFinanceData from "../helpers/getFinanceData";
@@ -9,13 +8,14 @@ import getSingleTicker from "../helpers/getSingleTicker";
 export default function Stocks(props) {
 	const history = useLocation();
 	const params = history.pathname;
-	const query = params.slice(8);
+	const {state} = props;
+	const {ticker} = useParams();
 	const [stockData, setStockData] = useState("");
 
 	useEffect(() => {
 		const top5 = ["AAPL", "MSFT", "AMZN", "TSLA", "NVDA"];
-		if (query) {
-			getFinanceData(query).then((data) => {
+		if (ticker) {
+			getFinanceData(ticker).then((data) => {
 				console.log(data);
 			});
 		} else {
@@ -35,7 +35,7 @@ export default function Stocks(props) {
 							<tr className="stocksData">
 								<td>{(count += 1)}</td>
 								<td className="dataName">
-									<a href={`/stocks/${response.symbol}`}>{response.symbol}</a>
+									<a href={`/stock/${response.symbol}`}>{response.symbol}</a>
 								</td>
 								<td className="dataPrice">{response.close}</td>
 							</tr>
@@ -45,24 +45,13 @@ export default function Stocks(props) {
 				setStockData(renderData);
 			};
 		}
-	}, [query]);
-
-	const addStockToWatchList = (e) => {
-		e.preventDefault();
-		const watchListID = query.toLowerCase().trim();
-		addToWatchList("stock", watchListID).then((response) => {
-			console.log(response);
-		});
-	};
-
-	const {state} = props;
-	const {ticker} = useParams();
+	}, [ticker]);
 
 	if (ticker) {
 		return (
 			<div className="stocksContainer">
 				<h1>Stocks</h1>
-				<CandleStick search={ticker} state={state} what="stock"/>
+				<CandleStick search={ticker} state={state} what="stock" />
 			</div>
 		);
 	} else {

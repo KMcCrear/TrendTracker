@@ -1,15 +1,14 @@
 import { React, useState } from "react";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import axios from "axios";
 import { Button } from "antd";
-import {} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CaretLeftOutlined, ExclamationCircleFilled } from "@ant-design/icons";
-import updateOnLogin from "../helpers/updateOnLogin";
-import endpoint from "../helpers/endPoint";
+import login from "../helpers/login";
+import register from "../helpers/register";
 
 const Register = (props) => {
-	//const history = useHistory();
 
+	const navigate = useNavigate();
 	const { state, onUpdate, setRegisterClicked } = props;
 	const [firstNameReg, setFirstNameReg] = useState(null);
 	const [surNameReg, setSurNameReg] = useState(null);
@@ -30,27 +29,13 @@ const Register = (props) => {
 		} else if (passwordReg !== passwordTwoReg) {
 			setRegisterStatus("Passwords don't match!");
 		} else {
-			const data = {
-				firstname: firstNameReg,
-				surname: surNameReg,
-				username: username,
-				password: passwordTwoReg,
-			};
-			axios.post(`${endpoint()}/auth/register`, data).then((response) => {
-				if (response.data.message) {
-					setRegisterStatus(response.data.message);
-				} else {
-					console.log("data is ", data);
-					axios
-						.post(`${endpoint()}/login`, {
-							username: username,
-							password: passwordTwoReg,
-						})
-						.then((response) => {
-							//updateOnLogin(onUpdate, response.data[0]);
-							//history.push("/");
-						});
-				}
+			register(firstNameReg,surNameReg,username,passwordTwoReg).then((res) => {
+				login(username,passwordTwoReg).then((res) => {
+					navigate("/");
+				});
+			}).catch((err) => {
+				console.log(err)
+				alert("Unable");
 			});
 		}
 	};
