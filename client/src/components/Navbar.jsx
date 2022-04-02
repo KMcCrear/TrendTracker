@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import login from "../helpers/login";
-// import ReorderIcon from "@material-ui/icons/Reorder";
+import React, {useState } from "react";
 
 function NavBar(props) {
 	const { state } = props;

@@ -8,9 +8,6 @@ import Portfolio from "./pages/Portfolio";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
-import { useEffect } from "react";
-import endPoint from "./helpers/endPoint";
-import axios from "axios";
 import jscookie from "js-cookie";
 
 const App = () => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Chart from "react-apexcharts";
 import makeChartData from "../helpers/makeChartData";
 import {Alert} from 'antd'
+
 import addToWatchlist from "../helpers/addToWatchlist";
 import hasWatchlistItem from "../helpers/hasWatchlistItem";
 import deleteFromWatchlist from "../helpers/deleteFromWatchlist";
@@ -70,11 +71,11 @@ const CandleStick = (props)=>{
 		return (
 			<div id="chart">
 				<Chart
-					width={700}
+					width={'250%'}
+					height={400}
 					options={options.current}
 					series={[{data}]}
 					type="candlestick"
-					height={350}
 				/>
 				<div id="chartButtons">
 					<div>
