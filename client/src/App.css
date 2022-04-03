@@ -165,6 +165,10 @@ button:hover {
 	align-items: left;
 }
 
+.stocksContainer .heading {
+	margin-left: 50px;
+}
+
 .stocksContainer .headerTable {
 	table-layout: auto;
 	text-align: left;
@@ -182,6 +186,14 @@ button:hover {
 	width: 100%;
 }
 
+.stocksContainer #newsInfo {
+	/* width: 200%; */
+	border-style: solid;
+	border-radius: 20px;
+	margin-top: 5px;
+	margin-left: 10px;
+	padding: 10px;
+}
 .stocksContainer .headerTable .columns .columnData {
 	box-sizing: border-box;
 	height: 60px;

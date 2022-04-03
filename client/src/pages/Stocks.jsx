@@ -4,13 +4,16 @@ import getFinanceData from "../helpers/getFinanceData";
 import CandleStick from "../components/CandleStick";
 import addToWatchList from "../helpers/addToWatchlist";
 import getSingleTicker from "../helpers/getSingleTicker";
+import NewsInfo from "../components/NewsInfo";
+import getTweets from "../helpers/getTweets";
 
 export default function Stocks(props) {
 	const history = useLocation();
 	const params = history.pathname;
-	const {state} = props;
-	const {ticker} = useParams();
+	const { state } = props;
+	const { ticker } = useParams();
 	const [stockData, setStockData] = useState("");
+	const [tweets, setTweets] = useState([]);
 
 	useEffect(() => {
 		const top5 = ["AAPL", "MSFT", "AMZN", "TSLA", "NVDA"];
@@ -18,6 +21,11 @@ export default function Stocks(props) {
 			getFinanceData(ticker).then((data) => {
 				console.log(data);
 			});
+			const getTweetData = async () => {
+				const data = await getTweets(ticker.toUpperCase());
+				setTweets(data);
+			};
+			getTweetData();
 		} else {
 			let anArray = [];
 			top5.forEach((entry) => {
@@ -50,14 +58,17 @@ export default function Stocks(props) {
 	if (ticker) {
 		return (
 			<div className="stocksContainer">
-				<h1>Stocks</h1>
+				<h1 className="heading">{ticker} Stock Price</h1>
 				<CandleStick search={ticker} state={state} what="stock" />
+				<div id="newsInfo">
+					<NewsInfo tweets={tweets} search={ticker} />
+				</div>
 			</div>
 		);
 	} else {
 		return (
 			<div className="stocksContainer">
-				<h1>Stocks</h1>
+				<h1 className="heading">Trending Stocks</h1>
 				<table className="headerTable">
 					<thead className="columns">
 						<tr className="columnData">
