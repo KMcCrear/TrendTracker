@@ -71,11 +71,11 @@ const CandleStick = (props)=>{
 		return (
 			<div id="chart">
 				<Chart
-					width={700}
+					width={'250%'}
+					height={400}
 					options={options.current}
 					series={[{data}]}
 					type="candlestick"
-					height={350}
 				/>
 				<div id="chartButtons">
 					<div>

@@ -3,10 +3,10 @@ import {Card,Space} from 'antd';
 import getTweets from '../helpers/getTweets';
 import getSentiment from '../helpers/getSentiment';
 import { PieChart } from 'react-minimal-pie-chart';
-
+import '../css/Dashboard.css'
 
 const TweetInfo = (props)=>{
-    const {search} = props;
+    const {tweets, search} = props;
     
     const sentiments= {
         positive: 5,
@@ -20,9 +20,8 @@ const TweetInfo = (props)=>{
 
     // useEffect(()=>{
     //     const getSentiments = async()=>{
-    //         const newTweets = await getTweets(search.toUpperCase());
 
-    //         const sentimentsRequests = newTweets.data.map((tweet)=>{
+    //         const sentimentsRequests = tweets.data.map((tweet)=>{
     //             return getSentiment(search, tweet.text)
     //         })
     //         const sentimentResponses = await Promise.all(sentimentsRequests);
@@ -42,23 +41,32 @@ const TweetInfo = (props)=>{
     //     }
 
     // getSentiments();
-    // },[search])
+    // },[tweets])
 
     return(
-        <Card>
-            <Space direction ='vertical'>
-            <h3>Opinion on twitter based on tweet information</h3>
-            <PieChart
-            label={({ dataEntry }) => `${dataEntry.title} - ${Math.round(dataEntry.percentage)} %`}
-            labelStyle={{fontSize: '3px'}}
-                data={[
-                    { title: 'Positive', value: sentiments.positive, color: 'green' },
-                    { title: 'Negative', value: sentiments.negative, color: 'red' },
-                    { title: 'Neutral', value: sentiments.neutral, color: 'grey' },
-                ]}
-                />
+        <>
+
+            <Space direction='horizontal'>
+            <Card>
+                <Space direction ='vertical'>
+                    <h3>Opinion on twitter</h3>
+                    <PieChart
+                    style={{display:'inline-block'}}
+                    label={({ dataEntry }) => `${dataEntry.title} - ${Math.round(dataEntry.percentage)} %`}
+                    labelStyle={{fontSize: '3px'}}
+                        data={[
+                            { title: 'Positive', value: sentiments.positive, color: 'green' },
+                            { title: 'Negative', value: sentiments.negative, color: 'red' },
+                            { title: 'Neutral', value: sentiments.neutral, color: 'grey' },
+                        ]}
+                        />
+                </Space>
+
+             </Card>
+
             </Space>
-        </Card>
+
+        </>
     )
 }
 

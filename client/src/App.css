@@ -372,10 +372,7 @@ div#chart {
 
 	.Navbar .leftSide #hidden {
 		position: absolute;
-		left: 0px;
-		top: 80px;
-		height: 180px;
-		max-height: 200px;
+		height: 100px;
 		width: 100%;
 		background-color: #4ea699;
 		display: flex;
