@@ -82,6 +82,7 @@ button:hover {
 }
 
 .cryptoContainer .title {
+	background-color: #fec0ce;
 	align-items: left;
 }
 
@@ -90,6 +91,7 @@ button:hover {
 	text-align: left;
 	width: 930px;
 	margin-left: 50px;
+	background-color: #b02acb;
 }
 
 .cryptoContainer .headerTable .columns {
@@ -121,6 +123,7 @@ button:hover {
 	text-align: left;
 	width: 930px;
 	margin-left: 50px;
+	background-color: #d9d9d9;
 }
 
 .cryptoContainer .loadedCryptoData {
@@ -163,6 +166,7 @@ button:hover {
 
 /* StockPage CSS */
 .stocksContainer .title {
+	background-color: #fec0ce;
 	align-items: left;
 }
 
@@ -171,6 +175,7 @@ button:hover {
 	text-align: left;
 	width: 930px;
 	margin-left: 50px;
+	background-color: #b02abc;
 }
 
 .stocksContainer .headerTable .columns {
@@ -282,7 +287,7 @@ div#chart {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: #643a64;
+	background-color: #b02abc;
 	box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
 }
 
