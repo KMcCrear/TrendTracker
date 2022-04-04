@@ -160,10 +160,13 @@ button:hover {
 	justify-content: right;
 }
 
-
 /* StockPage CSS */
 .stocksContainer .title {
 	align-items: left;
+}
+
+.stocksContainer .heading {
+	margin-left: 50px;
 }
 
 .stocksContainer .headerTable {
@@ -183,6 +186,14 @@ button:hover {
 	width: 100%;
 }
 
+.stocksContainer #newsInfo {
+	/* width: 200%; */
+	border-style: solid;
+	border-radius: 20px;
+	margin-top: 5px;
+	margin-left: 10px;
+	padding: 10px;
+}
 .stocksContainer .headerTable .columns .columnData {
 	box-sizing: border-box;
 	height: 60px;
@@ -242,13 +253,12 @@ button:hover {
 }
 
 div#chartButtons {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 div#chart {
-    width: fit-content;
-
+	width: fit-content;
 }
 
 .content {
@@ -259,7 +269,7 @@ div#chart {
 .content .header {
 	width: 100%;
 	font-family: Arial, Helvetica, sans-serif;
-	background-color: #fec0ce;
+	background-color: #18a999;
 	font-size: 25px;
 	box-shadow: 0 50px 70px -20px rgba(238, 238, 238, 0.8);
 }
@@ -282,7 +292,7 @@ div#chart {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: #643a64;
+	background-color: #18a999;
 	box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
 }
 
