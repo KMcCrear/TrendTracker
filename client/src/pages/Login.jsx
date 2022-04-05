@@ -56,7 +56,7 @@ const Login = (props) => {
 				</div>
 				<div className="login">
 					<div className="loginContainer">
-						<label class="label">Username</label>
+						<label className="label">Username</label>
 						<input
 							type="username"
 							onChange={(e) => {

@@ -18,7 +18,7 @@ function NavBar(props) {
 						<a href="/">Dashboard</a>
 						<a href="/stock">Stocks</a>
 						<a href="/crypto">Crypto</a>
-						<a href="/login">{state.loggedIn ? "Logout" : "Login"}</a>
+						{state.loggedIn ? <a href="/logout">Logout</a>:<a href="/login">Login</a>}
 						<a href="/portfolio">Portfolio</a>
 					</div>
 					<button onClick={() => setShowLinks(!showLinks)}>
