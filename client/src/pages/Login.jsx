@@ -23,6 +23,7 @@ const Login = (props) => {
 			loginHelper(username,password)
 			.then((response) => {
 				navigate('/')
+				navigate(0);
 			}).catch((err) => {
 				if (err.response.status == 401) {
 					setLoginStatus('Incorrect username or password!');
