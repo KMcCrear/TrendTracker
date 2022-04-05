@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Chart from "react-apexcharts";
 import makeChartData from "../helpers/makeChartData";
-import {Alert} from 'antd'
 
 import addToWatchlist from "../helpers/addToWatchlist";
 import hasWatchlistItem from "../helpers/hasWatchlistItem";
@@ -32,7 +31,19 @@ const CandleStick = (props)=>{
 				enabled: true,
 			},
 		},
-	},)
+		noData: {
+			text: "No data found",
+			align: 'center',
+			verticalAlign: 'middle',
+			offsetX: 0,
+			offsetY: 0,
+			style: {
+				color: undefined,
+				fontSize: '14px',
+				fontFamily: undefined
+			}
+		}
+	})
 
 
 	const updateData = async()=>{
@@ -67,34 +78,31 @@ const CandleStick = (props)=>{
 		fetchData();
 	},[search])
 
-	if(data.length>0){
-		return (
-			<div id="chart">
-				<Chart
-					width={'250%'}
-					height={400}
-					options={options.current}
-					series={[{data}]}
-					type="candlestick"
-				/>
-				<div id="chartButtons">
-					<div>
-						<button onClick={updateData}>Refresh</button>
-						{portfolioButton}
-					</div>
-					<div>
-						<button onClick={() => setSearch(propSearch)}>1d</button>
-						<button onClick={() => setSearch(propSearch + '?range=week')}>7d</button>
-						<button onClick={() => setSearch(propSearch + '?range=month')}>30d</button>
-						<button onClick={() => setSearch(propSearch + '?range=quarter')}>90d</button>
-						<button onClick={() => setSearch(propSearch + '?range=year')}>1y</button>
-						<button onClick={() => setSearch(propSearch + '?range=2year')}>2y</button>
-					</div>
+	return (
+		<div id="chart">
+			<Chart
+				width={'250%'}
+				height={400}
+				options={options.current}
+				series={[{data}]}
+				type="candlestick"
+			/>
+			<div id="chartButtons">
+				<div>
+					<button onClick={updateData}>Refresh</button>
+					{portfolioButton}
 				</div>
-				
+				<div>
+					<button onClick={() => setSearch(propSearch)}>1d</button>
+					<button onClick={() => setSearch(propSearch + '?range=week')}>7d</button>
+					<button onClick={() => setSearch(propSearch + '?range=month')}>30d</button>
+					<button onClick={() => setSearch(propSearch + '?range=quarter')}>90d</button>
+					<button onClick={() => setSearch(propSearch + '?range=year')}>1y</button>
+					<button onClick={() => setSearch(propSearch + '?range=2year')}>2y</button>
+				</div>
 			</div>
-		);
-	}
-	return(<Alert type='warning' message={`No stock data found for ${search}`}/>)
+			
+		</div>
+	);
 }
 export default CandleStick ;
