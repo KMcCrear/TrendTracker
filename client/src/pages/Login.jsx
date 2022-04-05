@@ -45,6 +45,14 @@ const Login = (props) => {
 			/>
 		);
 	}
+	if (state.loggedIn) {
+		return (
+			<div>
+				<h2>You are already logged in!</h2>
+				<button onClick={() => navigate(-1)}>Back</button>
+			</div>
+		)
+	}	
 	return (
 		<div className="Container">
 			<div className="content">
