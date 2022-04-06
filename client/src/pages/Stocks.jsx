@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import getFinanceData from "../helpers/getFinanceData";
 import CandleStick from "../components/CandleStick";
-import addToWatchList from "../helpers/addToWatchlist";
 import getSingleTicker from "../helpers/getSingleTicker";
 import NewsInfo from "../components/NewsInfo";
 import getTweets from "../helpers/getTweets";
 
 export default function Stocks(props) {
-	const history = useLocation();
-	const params = history.pathname;
 	const { state } = props;
 	const { ticker } = useParams();
 	const [stockData, setStockData] = useState("");

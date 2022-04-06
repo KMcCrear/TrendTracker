@@ -7,14 +7,12 @@ import addToWatchList from "../helpers/addToWatchlist";
 import getCoinData from "../helpers/getCoinData";
 import { Space } from "antd";
 
-export default function Crypto() {
+export default function Crypto(props) {
 	const [cryptoData, setCryptoData] = useState("");
 	const [seriesData, setSeriesData] = useState("");
-	const history = useLocation();
-	const query = history.pathname;
-	const queryString = query.slice(8);
 
-	const { ticker } = useParams();
+	const { state } = props;
+	const { coin } = useParams();
 
 	useEffect(() => {
 		const getTop12Coins = async () => {
@@ -35,22 +33,22 @@ export default function Crypto() {
 
 			setSeriesData(
 				<Space direction="horizontal" style={{ width: "100%" }}>
-					<TimeSeries name={query.slice(8)} data={arrayToSend} />
-					<TweetInfo search={query.slice(8).toLocaleLowerCase()} />
+					<TimeSeries name={coin} data={arrayToSend} />
+					<TweetInfo search={coin.toLocaleLowerCase()} />
 				</Space>
 			);
 		};
 
 		const getSingleCoinData = async () => {
-			const coinData = await getCoinData(query.slice(8).toLowerCase());
+			const coinData = await getCoinData(coin.toLowerCase());
 			createTable(coinData);
 		};
-		if (queryString) {
+		if (coin) {
 			getSingleCoinData();
 		} else {
 			getTop12Coins();
 		}
-	}, [query, queryString, ticker]);
+	}, [coin]);
 
 	const renderData = (cryptoArray) => {
 		let count = 0;
@@ -60,7 +58,7 @@ export default function Crypto() {
 					<tr className="cryptoData">
 						<td>{(count += 1)}</td>
 						<td className="dataName">
-							<a href={`/coins/${data.name}`}>{data.name}</a>
+							<a href={`/crypto/${data.name}`}>{data.name}</a>
 						</td>
 						<td className="dataPrice">{data.quote.USD.price}</td>
 						<td>{Math.round(data.quote.USD.percent_change_1h * 100) / 100}</td>
@@ -77,20 +75,22 @@ export default function Crypto() {
 
 	const addCoinToWatchList = (e) => {
 		e.preventDefault();
-		const watchListID = query.slice(8).toLowerCase().trim();
+		const watchListID = coin.toLowerCase().trim();
 		addToWatchList("crypto", watchListID).then((response) => {
 			console.log(response);
 		});
 	};
 
-	if (queryString) {
+	if (coin) {
 		return (
 			<div>
 				<h1>Coins Bro</h1>
 				<div>{seriesData}</div>
+				{(state.loggedIn ? 
 				<button onClick={(e) => addCoinToWatchList(e)}>
 					Add to your Watchlist
-				</button>
+				</button> : null)}
+				
 			</div>
 		);
 	} else {
