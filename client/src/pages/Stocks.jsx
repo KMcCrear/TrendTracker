@@ -48,7 +48,7 @@ export default function Stocks(props) {
 								<td className="dataName">
 									<a href={`/stock/${response.symbol}`}>{response.symbol}</a>
 								</td>
-								<td className="dataPrice">{response.close}</td>
+								<td className="dataPrice">${response.close}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -102,6 +102,7 @@ export default function Stocks(props) {
 						"border-radius": "20px",
 						"margin-left": "5px",
 						"background-color": "#6399B8",
+						position: "static",
 					}}
 				>
 					<h3>Sample tweets about {random}</h3>
@@ -109,16 +110,21 @@ export default function Stocks(props) {
 					{tweets.data &&
 						tweets.data.slice(0, 5).map((tweet) => <p>{tweet.text}</p>)}
 				</div>
-				<table className="headerTable">
-					<thead className="columns">
-						<tr className="columnData">
-							<th>#</th>
-							<th>Stock</th>
-							<th>Price</th>
-						</tr>
-					</thead>
-				</table>
-				{stockData}
+				<div className="tableContainer">
+					<table className="headerTable">
+						<thead className="columns">
+							<tr className="columnData">
+								<th>#</th>
+								<th>Stock</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+					</table>
+					{stockData}
+				</div>
+				<div id="newsInfo">
+					<NewsInfo tweets={random} search={random} />
+				</div>
 			</div>
 		);
 	}
