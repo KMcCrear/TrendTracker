@@ -9,7 +9,7 @@ import { Space } from "antd";
 
 export default function Crypto(props) {
 	const [cryptoData, setCryptoData] = useState("");
-	const [seriesData, setSeriesData] = useState("");
+	const [graphData, setGraphData] = useState("");
 
 	const { state } = props;
 	const { coin } = useParams();
@@ -19,29 +19,14 @@ export default function Crypto(props) {
 			const cryptoData = await getCryptoData();
 			renderData(cryptoData.slice(0, 12));
 		};
-		const createTable = (data) => {
-			let coinAarry = data.prices;
-			let arrayToSend = [];
 
-			coinAarry.forEach((entry) => {
-				arrayToSend.push({
-					x: new Date(entry[0]),
-					y: [entry[1]],
-				});
-			});
-			//console.log(arrayToSend);
-
-			setSeriesData(
+		const getSingleCoinData = async () => {
+			setGraphData(
 				<Space direction="horizontal" style={{ width: "100%" }}>
-					<TimeSeries name={coin} data={arrayToSend} />
+					<TimeSeries search={coin} state={state} what="crypto"/>
 					<TweetInfo search={coin.toLocaleLowerCase()} />
 				</Space>
 			);
-		};
-
-		const getSingleCoinData = async () => {
-			const coinData = await getCoinData(coin.toLowerCase());
-			createTable(coinData);
 		};
 		if (coin) {
 			getSingleCoinData();
@@ -73,24 +58,11 @@ export default function Crypto(props) {
 		setCryptoData(renderedCrypto);
 	};
 
-	const addCoinToWatchList = (e) => {
-		e.preventDefault();
-		const watchListID = coin.toLowerCase().trim();
-		addToWatchList("crypto", watchListID).then((response) => {
-			console.log(response);
-		});
-	};
-
 	if (coin) {
 		return (
 			<div>
 				<h1>Coins Bro</h1>
-				<div>{seriesData}</div>
-				{(state.loggedIn ? 
-				<button onClick={(e) => addCoinToWatchList(e)}>
-					Add to your Watchlist
-				</button> : null)}
-				
+				<div>{graphData}</div>
 			</div>
 		);
 	} else {
