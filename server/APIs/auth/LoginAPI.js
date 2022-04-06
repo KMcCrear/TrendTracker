@@ -71,7 +71,7 @@ module.exports = function(database) {
 					res.status(500).end();
 				}
 				else {
-					res.status(200).end("Successfully logged out");
+					res.status(200).clearCookie('state').end("Successfully logged out");
 				}
 			});
 		}
