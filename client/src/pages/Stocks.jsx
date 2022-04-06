@@ -14,9 +14,12 @@ export default function Stocks(props) {
 	const { ticker } = useParams();
 	const [stockData, setStockData] = useState("");
 	const [tweets, setTweets] = useState([]);
+	const [random, setRandom] = useState();
 
 	useEffect(() => {
 		const top5 = ["AAPL", "MSFT", "AMZN", "TSLA", "NVDA"];
+		let randomItem = top5[Math.floor(Math.random() * top5.length)];
+		setRandom(randomItem);
 		if (ticker) {
 			getFinanceData(ticker).then((data) => {
 				console.log(data);
@@ -52,6 +55,11 @@ export default function Stocks(props) {
 				));
 				setStockData(renderData);
 			};
+			const getTweetData = async () => {
+				const data = await getTweets(random.toUpperCase());
+				setTweets(data);
+			};
+			getTweetData();
 		}
 	}, [ticker]);
 
@@ -60,6 +68,21 @@ export default function Stocks(props) {
 			<div className="stocksContainer">
 				<h1 className="heading">{ticker} Stock Price</h1>
 				<CandleStick search={ticker} state={state} what="stock" />
+				<div
+					id="sampleTweets"
+					style={{
+						display: "inline-block",
+						"border-style": "solid",
+						"border-radius": "20px",
+						"margin-left": "5px",
+						"background-color": "#6399B8",
+					}}
+				>
+					<h3>Sample tweets about {ticker}</h3>
+
+					{tweets.data &&
+						tweets.data.slice(0, 5).map((tweet) => <p>{tweet.text}</p>)}
+				</div>
 				<div id="newsInfo">
 					<NewsInfo tweets={tweets} search={ticker} />
 				</div>
@@ -69,6 +92,23 @@ export default function Stocks(props) {
 		return (
 			<div className="stocksContainer">
 				<h1 className="heading">Trending Stocks</h1>
+				<div
+					id="sampleTweets"
+					style={{
+						display: "inline-block",
+						"align-content": "right",
+						float: "right",
+						"border-style": "solid",
+						"border-radius": "20px",
+						"margin-left": "5px",
+						"background-color": "#6399B8",
+					}}
+				>
+					<h3>Sample tweets about {random}</h3>
+
+					{tweets.data &&
+						tweets.data.slice(0, 5).map((tweet) => <p>{tweet.text}</p>)}
+				</div>
 				<table className="headerTable">
 					<thead className="columns">
 						<tr className="columnData">
