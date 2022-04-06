@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import getFinanceData from "../helpers/getFinanceData";
 import CandleStick from "../components/CandleStick";
 import getSingleTicker from "../helpers/getSingleTicker";
 import NewsInfo from "../components/NewsInfo";
@@ -15,9 +14,6 @@ export default function Stocks(props) {
 	useEffect(() => {
 		const top5 = ["AAPL", "MSFT", "AMZN", "TSLA", "NVDA"];
 		if (ticker) {
-			getFinanceData(ticker).then((data) => {
-				console.log(data);
-			});
 			const getTweetData = async () => {
 				const data = await getTweets(ticker.toUpperCase());
 				setTweets(data);
@@ -58,7 +54,7 @@ export default function Stocks(props) {
 				<h1 className="heading">{ticker} Stock Price</h1>
 				<CandleStick search={ticker} state={state} what="stock" />
 				<div id="newsInfo">
-					<NewsInfo tweets={tweets} search={ticker} />
+					<NewsInfo search={ticker} />
 				</div>
 			</div>
 		);
