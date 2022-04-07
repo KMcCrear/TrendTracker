@@ -161,6 +161,9 @@ button:hover {
 }
 
 /* StockPage CSS */
+
+.stocksContainer {
+}
 .stocksContainer .title {
 	align-items: left;
 }
@@ -174,6 +177,7 @@ button:hover {
 	text-align: left;
 	width: 930px;
 	margin-left: 50px;
+	position: static;
 }
 
 .stocksContainer .headerTable .columns {
@@ -193,6 +197,18 @@ button:hover {
 	margin-top: 5px;
 	margin-left: 10px;
 	padding: 10px;
+	position: static;
+}
+
+.stocksContainer #sampleTweets {
+	align-content: right;
+	float: "right";
+	display: "inline-block";
+	background-color: "#00ACEE";
+	border-radius: "5px";
+	width: 30%;
+	padding: "5px";
+	position: static;
 }
 .stocksContainer .headerTable .columns .columnData {
 	box-sizing: border-box;
@@ -213,6 +229,7 @@ button:hover {
 	text-align: left;
 	width: 930px;
 	margin-left: 50px;
+	position: static;
 }
 
 .stocksContainer .loadedStocksData {
