@@ -59,7 +59,6 @@ const BaseChart = (props) => {
 			/>
 			<div id="chartButtons">
 				<div>
-					<button>Switch</button>
 					{portfolioButton}
 				</div>
 				<div>
