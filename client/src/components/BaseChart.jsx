@@ -51,7 +51,7 @@ const BaseChart = (props) => {
 	return (
 		<div id="chart">
 			<Chart
-				width={'250%'}
+				width={'100%'}
 				height={400}
 				options={options}
 				series={[{data}]}
