@@ -8,6 +8,38 @@ body {
 	padding: 0;
 }
 
+.searchList {
+	position: absolute;
+	display: inline-block;
+	max-height: 35%;
+	overflow-y: auto;
+}
+
+.searchContent {
+	background-color:#f1f1f2;
+	display: block;
+	text-decoration: none;
+	color: black;
+	margin: 0px;
+	padding: 3%;
+	border-bottom: 2px #000000 solid;
+}
+
+.searchContent > p{
+	padding: 3%;
+	margin: 0px;
+}
+
+.searchContent > h2{
+	padding: 3%;
+	margin: 0px;
+}
+
+.searchContent:hover {
+	background-color:#a9a9a9;
+	cursor: pointer;
+}
+
 button:hover {
 	cursor: pointer;
 }
