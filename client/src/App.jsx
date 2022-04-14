@@ -8,7 +8,8 @@ import Crypto from "./pages/Crypto";
 import Portfolio from "./pages/Portfolio";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Logout from "./pages/Logout"
+import Logout from "./pages/Logout";
+import Home from "./pages/Home";
 
 import { useState } from "react";
 import jscookie from "js-cookie";
@@ -31,6 +32,10 @@ const App = () => {
 			<Routes>
 				<Route
 					exact path="/"
+					element={<Home state={state} />}
+				/>
+				<Route
+					path="/dashboard"
 					element={<Dashboard state={state} />}
 				/>
 				<Route
@@ -49,21 +54,21 @@ const App = () => {
 					path="/crypto/:coin"
 					element={<Crypto state={state} />}
 				/>
-				<Route 
+				<Route
 					path="/portfolio"
-					element={<Portfolio state={state} />} 
-				/>
+					element={<Portfolio state={state} 
+				/>} />
 				<Route 
-					path="/login"
-					element={<Login state={state} />} 
+					path="/login" 
+					element={<Login state={state} />}
 				/>
 				<Route 
 					path="/register" 
-					element={<Register state={state} />} 
-				/>
+					element={<Register state={state} 
+				/>} />
 				<Route 
-					path="/logout"
-					element={<Logout state={state}/>}
+					path="/logout" 
+					element={<Logout state={state} />} 
 				/>
 			</Routes>
 		</div>
