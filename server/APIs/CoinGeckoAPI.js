@@ -64,4 +64,17 @@ router.get("/coins/id/:search", (req, res) => {
 		});
 });
 
+router.get("/coins/all", (req,res) => {
+	axios({
+		method: "GET",
+		url: `https://api.coingecko.com/api/v3/coins/list`
+	}).then((response) => {
+		res.send(response.data);
+	})
+	.catch((err) => {
+		console.log(new Date().toString().substring(0, 24) + ": " + err.message);
+		res.send(err);
+	});
+})
+
 module.exports = router;

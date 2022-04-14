@@ -117,7 +117,7 @@ router.get("/search/company/:search", (req, res) => {
 	const searchQuery = req.params.search;
 	axios({
 		method: "get",
-		url: `https://api.polygon.io/v3/reference/tickers?market=stocks&search=${searchQuery}&limit=10&apiKey=${POLYGON_API_TOKEN}`,
+		url: `https://api.polygon.io/v3/reference/tickers?market=stocks&search=${searchQuery}&limit=100&apiKey=${POLYGON_API_TOKEN}`,
 	})
 		.then((response) => {
 			res.send(response.data.results);
