@@ -77,6 +77,164 @@ button:hover {
 	display: flex;
 }
 
+/* Home Page CSS */
+
+.homeContainer {
+	width: 100%;
+	height: 100%;
+}
+
+.homeContainer .homeHeader {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	background-color: #18a999;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #fff;
+}
+
+.homeContainer .homeMain {
+	background-color: #18a999;
+	margin-bottom: 0px;
+}
+
+.homeContainer .homeMain .homePics {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	text-align: center;
+	position: relative;
+}
+
+.homeContainer .homeMain .homePics a {
+	position: relative;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	opacity: 0;
+	animation: imageSlide;
+	animation-duration: 1.8s;
+	animation-delay: 0.5s;
+	animation-timing-function: ease-in;
+	animation-fill-mode: forwards;
+}
+
+.homeContainer .homeMain .homePics .imageDesc {
+	text-align: center;
+	color: #fff;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	text-decoration: none;
+}
+
+@keyframes imageSlide {
+	30% {
+		opacity: 20%;
+	}
+	50% {
+		opacity: 50%;
+	}
+	70% {
+		opacity: 70%;
+	}
+	100% {
+		opacity: 100%;
+	}
+}
+
+.homeContainer .homeMain .homePics .homeImg {
+	margin-left: 30px;
+	margin-top: 15px;
+}
+
+.homeContainer .homeMain .homePics img {
+	width: 400px;
+	height: 300px;
+	border-radius: 10px;
+}
+
+.homeContainer .homeMain .homePics .homeImg:hover {
+	box-shadow: 2px 10px 8px 3px #555353;
+}
+
+.homeContainer .descOfPages {
+	height: 100%;
+	margin-top: 0px;
+	background-color: #5eacdf;
+	display: flex;
+	justify-content: center;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 100vh;
+}
+
+@keyframes divEase {
+	10% {
+		opacity: 15%;
+	}
+	30% {
+		opacity: 20%;
+	}
+	40% {
+		opacity: 30%;
+	}
+	50% {
+		opacity: 50%;
+	}
+	70% {
+		opacity: 70%;
+	}
+	80% {
+		opacity: 80%;
+	}
+	100% {
+		opacity: 100%;
+	}
+}
+
+.homeContainer .descOfPages .payCalcDesc {
+	opacity: 0;
+	animation: divEase;
+	animation-duration: 1s;
+	animation-delay: 2s;
+	animation-fill-mode: forwards;
+}
+
+.homeContainer .descOfPages .searchDesc {
+	opacity: 0;
+	animation: divEase;
+	animation-duration: 1s;
+	animation-delay: 2.4s;
+	animation-fill-mode: forwards;
+}
+
+.homeContainer .descOfPages .aboutUsDesc {
+	opacity: 0;
+	animation: divEase;
+	animation-duration: 1s;
+	animation-delay: 2.8s;
+	animation-fill-mode: forwards;
+}
+
+.homeContainer .descOfPages section {
+	margin-top: 60px;
+}
+
+.homeContainer .descOfPages section h3 {
+	color: #fff;
+	font-size: 22px;
+}
+
+.homeContainer .descOfPages p {
+	margin-left: 20px;
+
+	padding: 10px;
+	height: 60px;
+	padding-bottom: 15px;
+	background-color: #fff;
+	border-radius: 7px;
+	width: 700px;
+}
+
 /* Crypto.jsx */
 .cryptoContainer {
 }
