@@ -6,113 +6,20 @@
 body {
 	margin: 0;
 	padding: 0;
-}
-
-.searchList {
-	position: absolute;
-	display: inline-block;
-	max-height: 35%;
-	overflow-y: auto;
-}
-
-.searchContent {
-	background-color:#f1f1f2;
-	display: block;
-	text-decoration: none;
-	color: black;
-	margin: 0px;
-	padding: 3%;
-	border-bottom: 2px #000000 solid;
-}
-
-.searchContent > p{
-	padding: 3%;
-	margin: 0px;
-}
-
-.searchContent > h2{
-	padding: 3%;
-	margin: 0px;
-}
-
-.searchContent:hover {
-	background-color:#a9a9a9;
-	cursor: pointer;
+	overflow: hidden;
+	background-color: #5d7e83
 }
 
 button:hover {
 	cursor: pointer;
 }
 
-.Navbar {
-	background-color: #4ea699;
-	width: 100%;
-	height: 80px;
-	font-family: Arial, Helvetica, sans-serif;
-	display: flex;
-}
-
-.Navbar .leftSide #logo {
-	color: white;
-	margin-left: 15px;
-	margin-right: 15px;
-}
-
-.Navbar .leftSide {
-	flex: 50%;
-	display: flex;
-	justify-content: left;
-	align-items: center;
-}
-
-.Navbar .leftSide .links {
-	max-height: 0px;
-}
-
-.Navbar .leftSide .links a {
-	text-decoration: none;
-	color: black;
-	font-size: 15px;
-	margin-left: 20px;
-}
-
-.Navbar .leftSide button {
-	display: none;
-	margin-left: 20px;
-	border: none;
-	border-radius: 3px;
-}
-
-.Navbar .leftSide #hidden {
-	display: flex;
-}
-
-.Navbar .rightSide {
-	flex: 50%;
-	display: flex;
-	justify-content: right;
-	align-items: center;
-}
-
-.Navbar .rightSide .links {
-	max-height: 90px;
-}
-
-.Navbar .rightSide .links a {
-	text-decoration: none;
-	color: black;
-	font-size: 23px;
-	margin-right: 15px;
-}
-
-.Navbar .leftSide #hidden {
-	display: flex;
-}
-
 /* Home Page CSS */
 
 .homeContainer {
 	width: 100%;
+	overflow-y: hidden;
+
 	height: 100%;
 }
 
@@ -120,13 +27,13 @@ button:hover {
 	display: flex;
 	justify-content: center;
 	text-align: center;
-	background-color: #18a999;
+	background-color: #5d7e83;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #fff;
 }
 
 .homeContainer .homeMain {
-	background-color: #18a999;
+	background-color: #5d7e83;
 	margin-bottom: 0px;
 }
 
@@ -476,7 +383,7 @@ div#chart {
 .content .header {
 	width: 100%;
 	font-family: Arial, Helvetica, sans-serif;
-	background-color: #18a999;
+	background-color: #7bbdb5c5;
 	font-size: 25px;
 	box-shadow: 0 50px 70px -20px rgba(238, 238, 238, 0.8);
 }
@@ -499,7 +406,8 @@ div#chart {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: #18a999;
+	background-image: linear-gradient(#cd6300, rgb(255, 208, 178));;
+	
 	box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
 }
 

@@ -15,30 +15,40 @@
     margin-left: 10px;
 }
 #newsInfo{
-    /* width: 200%; */
+    background-image: linear-gradient(#cd6300, rgb(255, 208, 178));
     border-style: solid;
     border-radius: 20px;
     margin-top: 5px;
-    margin-left: 10px;
     padding: 10px;
 }
 
 #sampleTweets{
-    /* float:'right'; */
     display: 'inline-block';
     background-color:'#00ACEE';
     border-radius:'5px';
     width: 30%;
     padding: '5px';
-    /* float: 'up' */
 }
 
 #newsCard{
     width: 33%;
+    min-height: 100%;
     display: inline-block;
+    vertical-align: top;
+}
+
+#title{
+    color: white;
+    text-decoration: none;
+}
+
+#title:hover{
+    text-decoration: underline;
 }
 
 .dashboardContainer{
     background-color: #c7dfe2;
+    position: relative;
+    z-index: 10;
     height: 100%;
 }
