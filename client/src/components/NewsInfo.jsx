@@ -11,15 +11,16 @@ const NewsInfo = (props) => {
 	useEffect(() => {
 		const displayNews = async (search) => {
 			const newsData = await getNewsData(search);
-			let rederedData = newsData.slice(0,3).map((data) => (
+			let rederedData = newsData.slice(0,3).map((data, index) => (
 				<div id='newsCard'>
 					<img style={{width:'40%'}} alt='' src={data.image_url}/>
 					<h4>
-						<a href={`${data.article_url}`}>{data.title}</a>
+						<a id='title' href={`${data.article_url}`}>{data.title}</a>
 					</h4>
 					<p>{data.description.slice(0,100)}...</p>
 					<p>Author: {data.author}</p>
 					<p>Published: {data.published_utc.slice(0, 10)}</p>
+
 				</div>
 			));
 			setNewsArticles(rederedData);
