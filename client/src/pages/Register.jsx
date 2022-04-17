@@ -32,6 +32,7 @@ const Register = (props) => {
 			register(firstNameReg,surNameReg,username,passwordTwoReg).then((res) => {
 				login(username,passwordTwoReg).then((res) => {
 					navigate("/");
+					navigate(0);
 				});
 			}).catch((err) => {
 				console.log(err)

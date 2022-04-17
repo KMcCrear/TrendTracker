@@ -57,4 +57,4 @@ const Dashboard = (props) => {
 	);
 };
 
-export { Dashboard };
+export default Dashboard;

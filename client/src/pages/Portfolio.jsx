@@ -50,30 +50,37 @@ export default function Portfolio(props) {
 		});
 	}, []);
 
+	if (state.loggedIn) {
+		return (
+			<div className="portfolioContainer">
+				<h1>User Portfolio</h1>
+
+				<table className="stockTable">
+					<thead className="columns">
+						<tr className="columnData">
+							<th>#</th>
+							<th>Stock</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody className="loadedStockData">{stockData}</tbody>
+				</table>
+				<table className="cryptoTable">
+					<thead className="columns">
+						<tr className="columnData">
+							<th>#</th>
+							<th>Coin</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody className="loadedCryptoData">{cryptoData}</tbody>
+				</table>		
+			</div>
+		);
+	}
 	return (
 		<div className="portfolioContainer">
-			<h1>User Portfolio</h1>
-
-			<table className="stockTable">
-				<thead className="columns">
-					<tr className="columnData">
-						<th>#</th>
-						<th>Stock</th>
-						<th>Price</th>
-					</tr>
-				</thead>
-				<tbody className="loadedStockData">{stockData}</tbody>
-			</table>
-			<table className="cryptoTable">
-				<thead className="columns">
-					<tr className="columnData">
-						<th>#</th>
-						<th>Coin</th>
-						<th>Price</th>
-					</tr>
-				</thead>
-				<tbody className="loadedCryptoData">{cryptoData}</tbody>
-			</table>		
+			<h2>In order to view your portfolio, you must login! <a href="/login">Click here</a></h2>
 		</div>
-	);
+	)
 }

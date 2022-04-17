@@ -23,6 +23,7 @@ const Login = (props) => {
 			loginHelper(username,password)
 			.then((response) => {
 				navigate('/')
+				navigate(0);
 			}).catch((err) => {
 				if (err.response.status == 401) {
 					setLoginStatus('Incorrect username or password!');
@@ -44,6 +45,14 @@ const Login = (props) => {
 			/>
 		);
 	}
+	if (state.loggedIn) {
+		return (
+			<div>
+				<h2>You are already logged in!</h2>
+				<button onClick={() => navigate(-1)}>Back</button>
+			</div>
+		)
+	}	
 	return (
 		<div className="Container">
 			<div className="content">
@@ -55,7 +64,7 @@ const Login = (props) => {
 				</div>
 				<div className="login">
 					<div className="loginContainer">
-						<label class="label">Username</label>
+						<label className="label">Username</label>
 						<input
 							type="username"
 							onChange={(e) => {

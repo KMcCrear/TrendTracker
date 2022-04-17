@@ -1,14 +1,9 @@
 import React, {useState } from "react";
+import SearchBar from "./SearchBar";
 
 function NavBar(props) {
 	const { state } = props;
 	const [showLinks, setShowLinks] = useState(false);
-	let tempInput = "";
-
-	const afunc = (e) => {
-		e.preventDefault();
-		props.setInput(tempInput);
-	};
 
 	return (
 		<div>
@@ -18,7 +13,7 @@ function NavBar(props) {
 						<a href="/">Dashboard</a>
 						<a href="/stock">Stocks</a>
 						<a href="/crypto">Crypto</a>
-						<a href="/login">{state.loggedIn ? "Logout" : "Login"}</a>
+						{state.loggedIn ? <a href="/logout">Logout</a>:<a href="/login">Login</a>}
 						<a href="/portfolio">Portfolio</a>
 					</div>
 					<button onClick={() => setShowLinks(!showLinks)}>
@@ -26,18 +21,7 @@ function NavBar(props) {
 					</button>
 				</div>
 				<div className="rightSide">
-					<div className="searchContainer">
-						<form onSubmit={afunc}>
-							<input
-								type="text"
-								placeholder={"Search Company Ticker"}
-								onChange={(e) => {
-									tempInput = e.target.value;
-								}}
-							/>
-							<button type="submit">Search</button>
-						</form>
-					</div>
+					<SearchBar/>
 				</div>
 			</div>
 		</div>

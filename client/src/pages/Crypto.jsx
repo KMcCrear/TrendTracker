@@ -7,50 +7,33 @@ import addToWatchList from "../helpers/addToWatchlist";
 import getCoinData from "../helpers/getCoinData";
 import { Space } from "antd";
 
-export default function Crypto() {
+export default function Crypto(props) {
 	const [cryptoData, setCryptoData] = useState("");
-	const [seriesData, setSeriesData] = useState("");
-	const history = useLocation();
-	const query = history.pathname;
-	const queryString = query.slice(8);
+	const [graphData, setGraphData] = useState("");
 
-	const { ticker } = useParams();
+	const { state } = props;
+	const { coin } = useParams();
 
 	useEffect(() => {
 		const getTop12Coins = async () => {
 			const cryptoData = await getCryptoData();
 			renderData(cryptoData.slice(0, 12));
 		};
-		const createTable = (data) => {
-			let coinAarry = data.prices;
-			let arrayToSend = [];
 
-			coinAarry.forEach((entry) => {
-				arrayToSend.push({
-					x: new Date(entry[0]),
-					y: [entry[1]],
-				});
-			});
-			//console.log(arrayToSend);
-
-			setSeriesData(
+		const getSingleCoinData = async () => {
+			setGraphData(
 				<Space direction="horizontal" style={{ width: "100%" }}>
-					<TimeSeries name={query.slice(8)} data={arrayToSend} />
-					<TweetInfo search={query.slice(8).toLocaleLowerCase()} />
+					<TimeSeries search={coin} state={state} what="crypto"/>
+					<TweetInfo search={coin.toLocaleLowerCase()} />
 				</Space>
 			);
 		};
-
-		const getSingleCoinData = async () => {
-			const coinData = await getCoinData(query.slice(8).toLowerCase());
-			createTable(coinData);
-		};
-		if (queryString) {
+		if (coin) {
 			getSingleCoinData();
 		} else {
 			getTop12Coins();
 		}
-	}, [query, queryString, ticker]);
+	}, [coin]);
 
 	const renderData = (cryptoArray) => {
 		let count = 0;
@@ -60,7 +43,7 @@ export default function Crypto() {
 					<tr className="cryptoData">
 						<td>{(count += 1)}</td>
 						<td className="dataName">
-							<a href={`/coins/${data.name}`}>{data.name}</a>
+							<a href={`/crypto/${data.name}`}>{data.name}</a>
 						</td>
 						<td className="dataPrice">{data.quote.USD.price}</td>
 						<td>{Math.round(data.quote.USD.percent_change_1h * 100) / 100}</td>
@@ -75,22 +58,11 @@ export default function Crypto() {
 		setCryptoData(renderedCrypto);
 	};
 
-	const addCoinToWatchList = (e) => {
-		e.preventDefault();
-		const watchListID = query.slice(8).toLowerCase().trim();
-		addToWatchList("crypto", watchListID).then((response) => {
-			console.log(response);
-		});
-	};
-
-	if (queryString) {
+	if (coin) {
 		return (
 			<div>
 				<h1>Coins Bro</h1>
-				<div>{seriesData}</div>
-				<button onClick={(e) => addCoinToWatchList(e)}>
-					Add to your Watchlist
-				</button>
+				<div>{graphData}</div>
 			</div>
 		);
 	} else {
