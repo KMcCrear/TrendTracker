@@ -70,20 +70,21 @@ function SearchBar() {
     return (
         <div className="searchContainer">
     
-            <div style={{display: 'inline-block', width:'120%'}} className="searchBar">
+            <div className="searchBar">
                 <form onSubmit={onceSubmitted}>
                     <input
                         id='searchInput'
                         type="text"
-                        placeholder={"Search Company Ticker"}
+                        placeholder={"Search for asset"}
                         onChange={onNewSearch}
                     />
                     <button id="searchButton" type="submit">Search</button>
                 </form>
+                <div className="searchList">
+                    {searchData}
+                </div>
             </div>
-            <div className="searchList">
-                {searchData}
-            </div>
+            
         </div>
     )
 }
