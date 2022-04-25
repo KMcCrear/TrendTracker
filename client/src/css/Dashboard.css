@@ -1,54 +1,55 @@
-#tweetInfo{
-    float:right;
-    width: 20%;
-    margin-right: 1%;
+#tweetInfo {
+	float: right;
+	width: 20%;
+	margin-right: 1%;
 }
-#tweetInfo, #candleGraph{
-    border-style: solid;
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 10px;
-    height: 28rem;
-    display:inline-block;
+#tweetInfo,
+#candleGraph {
+	border-style: solid;
+	border-radius: 20px;
+	padding: 10px;
+	margin-top: 10px;
+	height: 28rem;
+	display: inline-block;
 }
-#candleGraph{
-    margin-left: 10px;
+#candleGraph {
+	margin-left: 10px;
 }
-#newsInfo{
-    background-image: linear-gradient(#cd6300, rgb(255, 208, 178));
-    border-style: solid;
-    border-radius: 20px;
-    margin-top: 5px;
-    padding: 10px;
-}
-
-#sampleTweets{
-    display: 'inline-block';
-    background-color:'#00ACEE';
-    border-radius:'5px';
-    width: 30%;
-    padding: '5px';
+#newsInfo {
+	background-image: linear-gradient(#4ea699, rgb(195, 193, 245));
+	border-style: solid;
+	border-radius: 20px;
+	margin-top: 5px;
+	padding: 10px;
 }
 
-#newsCard{
-    width: 33%;
-    min-height: 100%;
-    display: inline-block;
-    vertical-align: top;
+#sampleTweets {
+	display: "inline-block";
+	background-color: "#00ACEE";
+	border-radius: "5px";
+	width: 30%;
+	padding: "5px";
 }
 
-#title{
-    color: white;
-    text-decoration: none;
+#newsCard {
+	width: 33%;
+	min-height: 100%;
+	display: inline-block;
+	vertical-align: top;
 }
 
-#title:hover{
-    text-decoration: underline;
+#title {
+	color: white;
+	text-decoration: none;
 }
 
-.dashboardContainer{
-    background-color: #c7dfe2;
-    position: relative;
-    z-index: 10;
-    height: 100%;
+#title:hover {
+	text-decoration: underline;
+}
+
+.dashboardContainer {
+	background-color: #c7dfe2;
+	position: relative;
+	z-index: 10;
+	height: 100%;
 }
