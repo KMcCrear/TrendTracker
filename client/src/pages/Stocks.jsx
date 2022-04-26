@@ -5,6 +5,9 @@ import CandleStick from "../components/CandleStick";
 import getSingleTicker from "../helpers/getSingleTicker";
 import NewsInfo from "../components/NewsInfo";
 import getTweets from "../helpers/getTweets";
+import TweetInfo from "../components/TweetInfo";
+import '../css/Dashboard.css';
+
 
 export default function Stocks(props) {
 	const { state } = props;
@@ -64,7 +67,10 @@ export default function Stocks(props) {
 		return (
 			<div className="stocksContainer">
 				<h1 className="heading">{ticker} Stock Price</h1>
+				<div id='candleGraph'>
 				<CandleStick search={ticker} state={state} what="stock" />
+				</div>
+
 				<div
 					id="sampleTweets"
 					style={{
@@ -80,9 +86,13 @@ export default function Stocks(props) {
 					{tweets.data &&
 						tweets.data.slice(0, 5).map((tweet) => <p>{tweet.text}</p>)}
 				</div>
+				<div id='tweetInfo'>
+						<TweetInfo id='tweetInfo' tweets={tweets }search={ticker} />
+				</div>
 				<div id="newsInfo">
 					<NewsInfo tweets={tweets} />
 				</div>
+		
 			</div>
 		);
 	} else {

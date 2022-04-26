@@ -3,7 +3,7 @@ import CandleStick from "../components/CandleStick";
 import TweetInfo from "../components/TweetInfo";
 import NewsInfo from "../components/NewsInfo";
 import '../css/Dashboard.css';
-import { Alert, Space } from "antd";
+import { Alert } from "antd";
 import getTweets from '../helpers/getTweets';
 
 const Dashboard = (props) => {
