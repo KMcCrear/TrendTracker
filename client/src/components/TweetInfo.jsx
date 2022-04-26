@@ -52,8 +52,6 @@ const TweetInfo = (props)=>{
                     <h3>Opinion on twitter</h3>
                     {Object.keys(sentiments).length > 0 &&(
                     <PieChart
-                    radius={40}
-                    style={{'margin-bottom':'50px'}}
                     label={({ dataEntry }) => `${dataEntry.title} - ${Math.round(dataEntry.percentage)} %`}
                     labelStyle={{fontSize: '3px'}}
                         data={[
