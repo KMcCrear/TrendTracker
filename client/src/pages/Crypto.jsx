@@ -3,8 +3,8 @@ import getCryptoData from "../helpers/getCryptoData";
 import { useParams } from "react-router-dom";
 import TimeSeries from "../components/TimeSeries";
 import TweetInfo from "../components/TweetInfo";
-import { Space } from "antd";
 import getTweets from "../helpers/getTweets";
+import '../css/Dashboard.css'
 
 export default function Crypto(props) {
 	const [cryptoData, setCryptoData] = useState("");
@@ -23,12 +23,14 @@ export default function Crypto(props) {
 			const newTweets = await getTweets(coin.toLocaleLowerCase());
 			setTweets(newTweets);
 			setGraphData(
-				<Space direction="horizontal" style={{ width: "100%" }}>
+				<>
+				<div id='candleGraph'>
 					<TimeSeries search={coin} state={state} what="crypto" style={{display:'inline-block'}}/>
+				</div>
 				<div id='tweetInfo' style={{display:'inline-block'}}>
 					<TweetInfo search={coin.toLocaleLowerCase()} tweets={tweets}/>
 				</div>
-				</Space>
+				</>
 			);
 		};
 		if (coin) {
