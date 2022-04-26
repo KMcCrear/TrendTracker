@@ -50,8 +50,10 @@ const TweetInfo = (props)=>{
             <Card>
                 <Space direction ='vertical'>
                     <h3>Opinion on twitter</h3>
+                    {Object.keys(sentiments).length > 0 &&(
                     <PieChart
-                    style={{display:'inline-block'}}
+                    radius={40}
+                    style={{'margin-bottom':'50px'}}
                     label={({ dataEntry }) => `${dataEntry.title} - ${Math.round(dataEntry.percentage)} %`}
                     labelStyle={{fontSize: '3px'}}
                         data={[
@@ -60,6 +62,10 @@ const TweetInfo = (props)=>{
                             { title: 'Neutral', value: sentiments.neutral, color: 'grey' },
                         ]}
                         />
+                    )}
+                    {Object.keys(sentiments).length === 0 &&(
+                        <h3>Loading...</h3>
+                    )}
                 </Space>
 
              </Card>

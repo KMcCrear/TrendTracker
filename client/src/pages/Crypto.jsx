@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import getCryptoData from "../helpers/getCryptoData";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TimeSeries from "../components/TimeSeries";
 import TweetInfo from "../components/TweetInfo";
-import addToWatchList from "../helpers/addToWatchlist";
-import getCoinData from "../helpers/getCoinData";
 import { Space } from "antd";
+import getTweets from "../helpers/getTweets";
 
 export default function Crypto(props) {
 	const [cryptoData, setCryptoData] = useState("");
 	const [graphData, setGraphData] = useState("");
-
+	const [tweets, setTweets] = useState([]);
 	const { state } = props;
 	const { coin } = useParams();
 
@@ -21,10 +20,14 @@ export default function Crypto(props) {
 		};
 
 		const getSingleCoinData = async () => {
+			const newTweets = await getTweets(coin.toLocaleLowerCase());
+			setTweets(newTweets);
 			setGraphData(
 				<Space direction="horizontal" style={{ width: "100%" }}>
-					<TimeSeries search={coin} state={state} what="crypto" />
-					<TweetInfo search={coin.toLocaleLowerCase()} />
+					<TimeSeries search={coin} state={state} what="crypto" style={{display:'inline-block'}}/>
+				<div id='tweetInfo' style={{display:'inline-block'}}>
+					<TweetInfo search={coin.toLocaleLowerCase()} tweets={tweets}/>
+				</div>
 				</Space>
 			);
 		};
