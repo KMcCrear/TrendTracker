@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import endPoint from "../helpers/endPoint";
-
+import '../css/SearchBar.css'
 function SearchBar() {
     const hasCryptoData = useRef(false);
     const hasStockData = useRef(false);
@@ -69,19 +69,22 @@ function SearchBar() {
 
     return (
         <div className="searchContainer">
+    
             <div className="searchBar">
                 <form onSubmit={onceSubmitted}>
                     <input
+                        id='searchInput'
                         type="text"
-                        placeholder={"Search Company Ticker"}
+                        placeholder={"Search for asset"}
                         onChange={onNewSearch}
                     />
-                    <button type="submit">Search</button>
+                    <button id="searchButton" type="submit">Search</button>
                 </form>
+                <div className="searchList">
+                    {searchData}
+                </div>
             </div>
-            <div className="searchList">
-                {searchData}
-            </div>
+            
         </div>
     )
 }

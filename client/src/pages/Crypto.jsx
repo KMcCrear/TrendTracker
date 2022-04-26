@@ -23,7 +23,7 @@ export default function Crypto(props) {
 		const getSingleCoinData = async () => {
 			setGraphData(
 				<Space direction="horizontal" style={{ width: "100%" }}>
-					<TimeSeries search={coin} state={state} what="crypto"/>
+					<TimeSeries search={coin} state={state} what="crypto" />
 					<TweetInfo search={coin.toLocaleLowerCase()} />
 				</Space>
 			);
@@ -61,7 +61,7 @@ export default function Crypto(props) {
 	if (coin) {
 		return (
 			<div>
-				<h1>Coins Bro</h1>
+				<h1>{coin}</h1>
 				<div>{graphData}</div>
 			</div>
 		);
