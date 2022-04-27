@@ -8,40 +8,40 @@ import '../css/Dashboard.css'
 const TweetInfo = (props)=>{
     const {tweets, search} = props;
     
-    const sentiments= {
+    /*const sentiments= {
         positive: 5,
         neutral: 10,
         negative: 8
-    }
+    }*/
 
     //uncomment the next block if you want to test the sentiment api - careful with the ammount of requests, we have only $18 credit
 
-    // const [sentiments, setSentiments] = useState({});
+     const [sentiments, setSentiments] = useState({});
 
-    // useEffect(()=>{
-    //     const getSentiments = async()=>{
+     useEffect(()=>{
+        const getSentiments = async()=>{
 
-    //         const sentimentsRequests = tweets.data.map((tweet)=>{
-    //             return getSentiment(search, tweet.text)
-    //         })
-    //         const sentimentResponses = await Promise.all(sentimentsRequests);
+            const sentimentsRequests = tweets.data.map((tweet)=>{
+                return getSentiment(search, tweet.text)
+            })
+            const sentimentResponses = await Promise.all(sentimentsRequests);
 
-    //         const sentimentsFiltered = {neutral:0, positive:0, negative:0}
-    //         sentimentResponses.forEach((sentiment)=>{
-    //             if(sentiment.includes('positive')){
-    //                 sentimentsFiltered.positive += 1;
-    //             }   else if(sentiment.includes('negative')){
-    //                 sentimentsFiltered.negative += 1;
-    //             }
-    //             else if(sentiment.includes('neutral')){
-    //                 sentimentsFiltered.neutral += 1;
-    //             }
-    //         }) 
-    //         setSentiments(sentimentsFiltered);
-    //     }
+            const sentimentsFiltered = {neutral:0, positive:0, negative:0}
+            sentimentResponses.forEach((sentiment)=>{
+                if(sentiment.includes('positive')){
+                    sentimentsFiltered.positive += 1;
+                }   else if(sentiment.includes('negative')){
+                    sentimentsFiltered.negative += 1;
+                }
+                else if(sentiment.includes('neutral')){
+                    sentimentsFiltered.neutral += 1;
+                }
+            }) 
+            setSentiments(sentimentsFiltered);
+        }
 
-    // getSentiments();
-    // },[tweets])
+     getSentiments();
+    },[tweets])
 
     return(
         <>
