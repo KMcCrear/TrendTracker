@@ -49,10 +49,9 @@ const BaseChart = (props) => {
 	},[search])
 
 	return (
-		<div id="chart">
+		<div id="chart" style={{height: '100%'}}>
 			<Chart
-				width={'100%'}
-				height={400}
+				height={'100%'}
 				options={options}
 				series={[{data}]}
 				type={options.chart.type}

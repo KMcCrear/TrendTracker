@@ -67,8 +67,13 @@ export default function Stocks(props) {
 		return (
 			<div className="stocksContainer">
 				<h1 className="heading">{ticker} Stock Price</h1>
-				<div id='candleGraph'>
-				<CandleStick search={ticker} state={state} what="stock" />
+				<div className="graphAndTweet">
+					<div id='candleGraph'>
+						<CandleStick search={ticker} state={state} what="stock" />
+					</div>
+					<div id='tweetInfo'>
+						<TweetInfo id='tweetInfo' tweets={tweets }search={ticker} />
+					</div>
 				</div>
 
 				<div
@@ -82,15 +87,13 @@ export default function Stocks(props) {
 					}}
 				>
 					<h3>Sample tweets about {ticker}</h3>
-
-					{tweets.data &&
-						tweets.data.slice(0, 5).map((tweet) => <p>{tweet.text}</p>)}
+					<div style={{display: "flex"}}>
+						{tweets.data && tweets.data.slice(0, 5).map((tweet) => <p>{tweet.text}</p>)}
+					</div>
 				</div>
-				<div id='tweetInfo'>
-						<TweetInfo id='tweetInfo' tweets={tweets }search={ticker} />
-				</div>
+				
 				<div id="newsInfo">
-					<NewsInfo tweets={tweets} />
+					<NewsInfo search={ticker} />
 				</div>
 		
 			</div>
