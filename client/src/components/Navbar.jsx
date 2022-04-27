@@ -9,25 +9,25 @@ function NavBar(props) {
 			<div className="Navbar">
 				<div className="leftSide">
 					<div className="links">
-						<a class="navBarLink" href="/">
+						<a className="navBarLink" href="/">
 							Home
 						</a>
-						<a class="navBarLink" href="/stock">
+						<a className="navBarLink" href="/stock">
 							Stocks
 						</a>
-						<a class="navBarLink" href="/crypto">
+						<a className="navBarLink" href="/crypto">
 							Crypto
 						</a>
 						{state.loggedIn ? (
-							<a class="navBarLink" href="/logout">
+							<a className="navBarLink" href="/logout">
 								Logout
 							</a>
 						) : (
-							<a class="navBarLink" href="/login">
+							<a className="navBarLink" href="/login">
 								Login
 							</a>
 						)}
-						<a class="navBarLink" href="/portfolio">
+						<a className="navBarLink" href="/portfolio">
 							Portfolio
 						</a>
 					</div>

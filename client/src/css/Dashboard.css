@@ -1,17 +1,18 @@
-#tweetInfo,
-#candleGraph {
+#tweetInfo {
 	border-style: solid;
 	border-radius: 20px;
 	padding: 10px;
+	width:25%;
 
 	display: inline-block;
 	vertical-align: top;
 }
 #candleGraph {
-	/* margin-left: 10px; */
-	width: 30%;
-
-	height: 28rem;
+	border-style: solid;
+	border-radius: 20px;
+	padding: 10px;
+	margin-left: 10px;
+	width: 80%;
 }
 #newsInfo {
 	background-image: linear-gradient(#4ea699, rgb(195, 193, 245));
@@ -24,7 +25,6 @@
 	display: "inline-block";
 	background-color: "#00ACEE";
 	border-radius: "5px";
-	width: 30%;
 	padding: "5px";
 }
 
@@ -49,4 +49,8 @@
 	position: relative;
 	z-index: 10;
 	height: 100%;
+}
+
+.graphAndTweet {
+	display: flex;
 }

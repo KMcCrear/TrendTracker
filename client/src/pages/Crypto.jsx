@@ -65,9 +65,28 @@ export default function Crypto(props) {
 
 	if (coin) {
 		return (
-			<div>
-				<h1>{coin}</h1>
-				<div>{graphData}</div>
+			<div className="cryptoContainer">
+				<h1 className="heading">{coin} Stock Price</h1>
+				<div className="graphAndTweet">
+					{graphData}
+				</div>
+
+				<div
+					id="sampleTweets"
+					style={{
+						display: "inline-block",
+						"border-style": "solid",
+						"border-radius": "20px",
+						"margin-left": "5px",
+						"background-color": "#6399B8",
+					}}
+				>
+					<h3>Sample tweets about {coin}</h3>
+					<div style={{display: "flex"}}>
+						{tweets.data && tweets.data.slice(0, 5).map((tweet) => <p>{tweet.text}</p>)}
+					</div>
+				</div>
+
 			</div>
 		);
 	} else {

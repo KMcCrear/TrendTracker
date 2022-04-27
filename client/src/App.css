@@ -302,7 +302,6 @@ button:hover {
 	display: "inline-block";
 	background-color: "#00ACEE";
 	border-radius: "5px";
-	width: 30%;
 	padding: "5px";
 	position: static;
 }
@@ -368,10 +367,6 @@ button:hover {
 div#chartButtons {
 	display: flex;
 	justify-content: space-between;
-}
-
-div#chart {
-	width: fit-content;
 }
 
 .content {
